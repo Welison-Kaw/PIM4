@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="PIM" Class="ChamadosDALDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="WebSettings" ConnectionString="Data Source=JACK\SQLEXPRESS01;Initial Catalog=PIM;User ID=sa" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="PIMConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.CHAMADO" Member="CHAMADOs">
+    <Type Name="CHAMADO">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="DEPARTAMENTO" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="GRAU_URGENCIA" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="ANDAR" Type="System.String" DbType="VarChar(10) NOT NULL" CanBeNull="false" />
+      <Column Name="EQUIPAMENTO" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="DESCRICAO" Type="System.String" DbType="VarChar(500) NOT NULL" CanBeNull="false" />
+      <Column Name="CLIENTE" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="FUNCIONARIO" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="CONCLUSAO" Type="System.TimeSpan" DbType="Time" CanBeNull="true" />
+    </Type>
+  </Table>
+</Database>
