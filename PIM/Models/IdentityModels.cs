@@ -31,5 +31,7 @@ namespace PIM.Models
         }
 
         public System.Data.Entity.DbSet<PIM.Models.Chamado> Chamadoes { get; set; }
+
+        public System.Data.Entity.DbSet<PIM.Models.Setor> Setors { get; set; }
     }
 }

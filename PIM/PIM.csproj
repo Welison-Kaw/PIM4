@@ -200,20 +200,29 @@
     <Compile Include="Controllers\ChamadoController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\Repository\ISetorRepositorio.cs" />
+    <Compile Include="Controllers\SetorController.cs" />
     <Compile Include="DAL\ChamadosDAL.designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>ChamadosDAL.dbml</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\SetorDAL.designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SetorDAL.dbml</DependentUpon>
     </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Chamado.cs" />
-    <Compile Include="Models\ChamadoRepositorio.cs" />
-    <Compile Include="Models\IChamadoRepositorio.cs" />
+    <Compile Include="Models\Repository\ChamadoRepositorio.cs" />
+    <Compile Include="Controllers\Repository\IChamadoRepositorio.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\Repository\SetorRepositorio.cs" />
+    <Compile Include="Models\Setor.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -234,6 +243,11 @@
     <Content Include="DAL\ChamadosDAL.dbml">
       <Generator>MSLinqToSQLGenerator</Generator>
       <LastGenOutput>ChamadosDAL.designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="DAL\SetorDAL.dbml">
+      <Generator>MSLinqToSQLGenerator</Generator>
+      <LastGenOutput>SetorDAL.designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </Content>
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
@@ -282,6 +296,8 @@
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Chamado\View.cshtml" />
+    <Content Include="Views\Setor\Lista.cshtml" />
+    <Content Include="Views\Setor\Delete.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -300,6 +316,11 @@
   <ItemGroup>
     <None Include="DAL\ChamadosDAL.dbml.layout">
       <DependentUpon>ChamadosDAL.dbml</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="DAL\SetorDAL.dbml.layout">
+      <DependentUpon>SetorDAL.dbml</DependentUpon>
     </None>
   </ItemGroup>
   <PropertyGroup>

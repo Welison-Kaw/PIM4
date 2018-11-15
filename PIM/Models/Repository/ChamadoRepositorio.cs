@@ -6,10 +6,10 @@ using PIM.DAL;
 
 namespace PIM.Models
 {
-    public class ChamadoRepositorio: IChamadoRepositorio
+    public class ChamadoRepositorio//: IChamadoRepositorio
     {
         private ChamadosDALDataContext chamados_DataContext;
-
+        
         public ChamadoRepositorio ()
         {
             chamados_DataContext = new ChamadosDALDataContext();

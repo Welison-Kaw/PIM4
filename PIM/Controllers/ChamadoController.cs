@@ -14,8 +14,8 @@ namespace PIM.Controllers
         // GET: Chamado
         public ActionResult Index()
         {
-            var cliente = _repositorio.GetChamado();
-            return View(cliente);
+            var chamado = _repositorio.GetChamado();
+            return View(chamado);
         }
     }
 }
