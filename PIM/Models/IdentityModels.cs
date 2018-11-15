@@ -29,5 +29,7 @@ namespace PIM.Models
         {
             return new ApplicationDbContext();
         }
+
+        public System.Data.Entity.DbSet<PIM.Models.Chamado> Chamadoes { get; set; }
     }
 }
