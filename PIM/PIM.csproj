@@ -298,6 +298,9 @@
     <Content Include="Views\Chamado\View.cshtml" />
     <Content Include="Views\Setor\Lista.cshtml" />
     <Content Include="Views\Setor\Delete.cshtml" />
+    <Content Include="Views\Setor\Details.cshtml" />
+    <Content Include="Views\Setor\Create.cshtml" />
+    <Content Include="Views\Setor\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

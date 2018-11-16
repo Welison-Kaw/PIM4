@@ -63,20 +63,29 @@ namespace PIM.Models.Repository
             }
         }
 
-        public void InserirSetor(Setor _setor)
+        public void InserirSetor(Setor setor)
         {
-            //
+            try
+            {
+                var setorDados = new SETOR()
+                {
+                    //ID = setor.id,
+                    NOME = setor.Nome
+                };
+                setor_DataContext.SETORs.InsertOnSubmit(setorDados);
+                setor_DataContext.SubmitChanges();
+
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
 
         public void DeletarSetor(int setorID)
         {
             try
             {
-                //Setor setor = setor_DataContext.SETORs.Where(setor => setor.ID == setorID).SingleOrDefault();
-                //Setor setor = setor_DataContext.SETORs.Where(s => s.ID == setorID).SingleOrDefault();
-
-                //Setor setor = GetSetorPorID(setorID);
-                //setor_DataContext.SETORs.DeleteOnSubmit(setor);
                 SETOR setor = setor_DataContext.SETORs.Where(s => s.ID == setorID).SingleOrDefault();
                 setor_DataContext.SETORs.DeleteOnSubmit(setor);
                 setor_DataContext.SubmitChanges();
@@ -87,10 +96,25 @@ namespace PIM.Models.Repository
             }
         }
 
-        public void AtualizarSetor(Setor _setor)
+        public void AtualizarSetor(Setor setor)
         {
-            //
+            try
+            {
+                SETOR setorDados = setor_DataContext.SETORs.Where(s => s.ID == setor.id).SingleOrDefault();
+                setorDados.NOME = setor.Nome;
+                setor_DataContext.SubmitChanges();
+                /*Setor setordados = setor_DataContext.SETORs.Where(s => s.ID == setor.id).SingleOrDefault();
+                clienteDados.nome = clienteModel.Nome;
+                clienteDados.endereco = clienteModel.Endereco;
+                clienteDados.telefone = clienteModel.Telefone;
+                clienteDados.email = clienteModel.Email;
+                clienteDados.observacao = clienteModel.Observacao;
+                cliente_DataContext.SubmitChanges();*/
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
-
     }
 }

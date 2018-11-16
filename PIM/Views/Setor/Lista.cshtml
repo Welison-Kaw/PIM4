@@ -1,12 +1,12 @@
 ﻿@model IEnumerable<PIM.Models.Setor>
 
 <p>
-    //@Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Create New", "Create")
 </p>
 <table class="table">
     <tr>
         <th>
-            Código
+            @Html.DisplayNameFor(model => model.id)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Nome)

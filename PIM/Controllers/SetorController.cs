@@ -29,6 +29,57 @@ namespace PIM.Controllers
             return View(setor);
         }
 
+        public ActionResult Details(int id)
+        {
+            Setor model = _repositorio.GetSetorPorID(id);
+            return View(model);
+        }
+
+        public ActionResult Create()
+        {
+            return View(new Setor());
+        }
+        [HttpPost]
+        public ActionResult Create(Setor setor)
+        {
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    _repositorio.InserirSetor(setor);
+                    return RedirectToAction("Lista");
+                }
+            }
+            catch (DataException)
+            {
+                ModelState.AddModelError("", "Problemas ao salvar os dados...");
+            }
+            return View(setor);
+        }
+
+        public ActionResult Edit(int id)
+        {
+            Setor model = _repositorio.GetSetorPorID(id);
+            return View(model);
+        }
+        [HttpPost]
+        public ActionResult Edit(Setor setor)
+        {
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    _repositorio.AtualizarSetor(setor);
+                    return RedirectToAction("Lista");
+                }
+            }
+            catch (DataException)
+            {
+                ModelState.AddModelError("", "Problemas ao salvar os dados...");
+            }
+            return View(setor);
+        }
+
         public ActionResult Delete(int id, bool? saveChangesError)
         {
             if (saveChangesError.GetValueOrDefault())

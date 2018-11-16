@@ -79,4 +79,3 @@ C:\Users\Welison\documents\visual studio 2015\Projects\PIM.Web\PIM\bin\Microsoft
 C:\Users\Welison\documents\visual studio 2015\Projects\PIM.Web\PIM\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
 C:\Users\Welison\documents\visual studio 2015\Projects\PIM.Web\PIM\obj\Debug\PIM.dll
 C:\Users\Welison\documents\visual studio 2015\Projects\PIM.Web\PIM\obj\Debug\PIM.pdb
-C:\Users\Welison\documents\visual studio 2015\Projects\PIM.Web\PIM\obj\Debug\PIM.csprojResolveAssemblyReference.cache
