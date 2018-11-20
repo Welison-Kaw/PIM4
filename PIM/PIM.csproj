@@ -282,6 +282,7 @@
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Chamado.cs" />
+    <Compile Include="Models\Objects\Chamado.cs" />
     <Compile Include="Models\Objects\Cliente.cs" />
     <Compile Include="Models\Objects\Departamento.cs" />
     <Compile Include="Models\IdentityModels.cs" />
