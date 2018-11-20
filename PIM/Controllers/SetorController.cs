@@ -20,6 +20,7 @@ namespace PIM.Controllers
 
         public SetorController(ISetorRepositorio repositorio)
         {
+            ViewBag.Title = "Setores";
             _repositorio = repositorio;
         }
 

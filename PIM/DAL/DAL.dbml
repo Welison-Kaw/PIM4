@@ -1,0 +1,59 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="PIM" Class="DALDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="WebSettings" ConnectionString="Data Source=JACK\SQLEXPRESS01;Initial Catalog=PIM;User ID=sa" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="PIMConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.SETOR" Member="SETORs">
+    <Type Name="SETOR">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="NOME" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Association Name="SETOR_DEPARTAMENTO" Member="DEPARTAMENTOs" ThisKey="ID" OtherKey="SETOR" Type="DEPARTAMENTO" />
+    </Type>
+  </Table>
+  <Table Name="dbo.GRAU_URGENCIA" Member="GRAU_URGENCIAs">
+    <Type Name="GRAU_URGENCIA">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="NOME" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.FUNCIONARIO" Member="FUNCIONARIOs">
+    <Type Name="FUNCIONARIO">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="NOME" Type="System.String" DbType="VarChar(150) NOT NULL" CanBeNull="false" />
+      <Column Name="EMAIL" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="SENHA" Type="System.String" DbType="VarChar(16) NOT NULL" CanBeNull="false" />
+      <Column Name="DEPARTAMENTO" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="DEPARTAMENTO_FUNCIONARIO" Member="DEPARTAMENTO1" ThisKey="DEPARTAMENTO" OtherKey="ID" Type="DEPARTAMENTO" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.DEPARTAMENTO" Member="DEPARTAMENTOs">
+    <Type Name="DEPARTAMENTO">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="NOME" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="SETOR" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="DEPARTAMENTO_FUNCIONARIO" Member="FUNCIONARIOs" ThisKey="ID" OtherKey="DEPARTAMENTO" Type="FUNCIONARIO" />
+      <Association Name="DEPARTAMENTO_CLIENTE" Member="CLIENTEs" ThisKey="ID" OtherKey="DEPARTAMENTO" Type="CLIENTE" />
+      <Association Name="SETOR_DEPARTAMENTO" Member="SETOR1" ThisKey="SETOR" OtherKey="ID" Type="SETOR" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.CLIENTE" Member="CLIENTEs">
+    <Type Name="CLIENTE">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="NOME" Type="System.String" DbType="VarChar(150) NOT NULL" CanBeNull="false" />
+      <Column Name="EMAIL" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="SENHA" Type="System.String" DbType="VarChar(16) NOT NULL" CanBeNull="false" />
+      <Column Name="DEPARTAMENTO" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="DEPARTAMENTO_CLIENTE" Member="DEPARTAMENTO1" ThisKey="DEPARTAMENTO" OtherKey="ID" Type="DEPARTAMENTO" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.CHAMADO" Member="CHAMADOs">
+    <Type Name="CHAMADO">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="DEPARTAMENTO" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="GRAU_URGENCIA" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="ANDAR" Type="System.String" DbType="VarChar(10) NOT NULL" CanBeNull="false" />
+      <Column Name="EQUIPAMENTO" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="DESCRICAO" Type="System.String" DbType="VarChar(500) NOT NULL" CanBeNull="false" />
+      <Column Name="CLIENTE" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="FUNCIONARIO" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="CONCLUSAO" Type="System.TimeSpan" DbType="Time" CanBeNull="true" />
+    </Type>
+  </Table>
+</Database>
