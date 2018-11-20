@@ -372,6 +372,7 @@
     <Content Include="Views\Departamento\Create.cshtml" />
     <Content Include="Views\Departamento\Edit.cshtml" />
     <Content Include="Views\Chamado\Index.cshtml" />
+    <Content Include="Views\Chamado\Delete.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

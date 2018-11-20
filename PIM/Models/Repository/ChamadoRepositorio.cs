@@ -71,7 +71,49 @@ namespace PIM.Models.Repository
 
         public Chamado GetChamadoPorID(int chamadoID)
         {
-            return null;
+            var query = from a in dal_DataContext.CHAMADOs
+                           join b in dal_DataContext.DEPARTAMENTOs on a.DEPARTAMENTO equals b.ID
+                           join c in dal_DataContext.GRAU_URGENCIAs on a.GRAU_URGENCIA equals c.ID
+                           join d in dal_DataContext.CLIENTEs on a.CLIENTE equals d.ID
+                           join e in dal_DataContext.FUNCIONARIOs on a.FUNCIONARIO equals e.ID
+                        where a.ID == chamadoID
+                           select new
+                           {
+                               ID = a.ID,
+                               TITULO = a.TITULO,
+                               DESCRICAO = a.DESCRICAO,
+                               CONCLUSAO = a.CONCLUSAO,
+
+                               DEPARTAMENTOID = b.ID,
+                               DEPARTAMENTONOME = b.NOME,
+                               GRAUURGENCIAID = c.ID,
+                               GRAUURGENCIANOME = c.NOME,
+                               CLIENTEID = d.ID,
+                               CLIENTENOME = d.NOME,
+                               FUNCIONARIOID = e.ID,
+                               FUNCIONARIONOME = e.NOME
+                           };
+
+            try
+            {
+                var chamadoDados = query.FirstOrDefault();
+                var model = new Chamado() { 
+                    id = chamadoDados.ID,
+                    Titulo = chamadoDados.TITULO,
+                    Descricao = chamadoDados.DESCRICAO,
+                    Conclusao = chamadoDados.CONCLUSAO,
+
+                    Departamento = new Departamento() { id = chamadoDados.DEPARTAMENTOID, Nome = chamadoDados.DEPARTAMENTONOME },
+                    GrauUrgencia = new GrauUrgencia() { id = chamadoDados.GRAUURGENCIAID, Nome = chamadoDados.GRAUURGENCIANOME },
+                    Cliente = new Cliente() { id = chamadoDados.CLIENTEID, Nome = chamadoDados.CLIENTENOME },
+                    Funcionario = new Funcionario() { id = chamadoDados.FUNCIONARIOID, Nome = chamadoDados.FUNCIONARIONOME }
+                };
+                return model;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
 
         public void InserirChamado(Chamado _chamado)

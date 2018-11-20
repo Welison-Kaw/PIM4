@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using PIM.Models.Repository;
-using PIM.Models;
+using PIM.Models.Objects;
 using PIM.Controllers.Repository;
 using System.Data;
 
@@ -28,6 +28,29 @@ namespace PIM.Controllers
         {
             var chamado = _repositorio.GetChamado();
             return View(chamado);
+        }
+
+        public ActionResult Delete(int id, bool? saveChangesError)
+        {
+            if (saveChangesError.GetValueOrDefault())
+            {
+                ViewBag.ErrorMessage = "Problema ao deletar dados";
+            }
+            Chamado chamado = _repositorio.GetChamadoPorID(id);
+            return View(chamado);
+        }
+        [HttpPost, ActionName("Delete")]
+        public ActionResult DeleteConfirmed(int id)
+        {
+            try
+            {
+                _repositorio.DeletarChamado(id);
+            }
+            catch (DataException)
+            {
+                return RedirectToAction("Delete", new System.Web.Routing.RouteValueDictionary { { "id", id }, { "saveChangesError", true } });
+            }
+            return RedirectToAction("Index");
         }
     }
 }
