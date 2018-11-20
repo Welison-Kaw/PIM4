@@ -137,7 +137,23 @@ namespace PIM.Models.Repository
 
         public void AtualizarChamado(Chamado _chamado)
         {
-            //
+            try
+            {
+                CHAMADO chamadoDados = dal_DataContext.CHAMADOs.Where(c => c.ID == _chamado.id).SingleOrDefault();
+                chamadoDados.TITULO = _chamado.Titulo;
+                chamadoDados.DESCRICAO = _chamado.Descricao;
+
+                chamadoDados.DEPARTAMENTO = _chamado.DepartamentoID;
+                chamadoDados.GRAU_URGENCIA = _chamado.GrauUrgenciaID;
+                chamadoDados.CLIENTE = _chamado.ClienteID;
+                chamadoDados.FUNCIONARIO = _chamado.FuncionarioID;
+
+                dal_DataContext.SubmitChanges();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
     }
 }

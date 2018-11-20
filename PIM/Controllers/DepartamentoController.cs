@@ -70,6 +70,7 @@ namespace PIM.Controllers
         public ActionResult Edit(int id)
         {
             Departamento model = _repositorio.GetDepartamentoPorID(id);
+
             List<SelectListItem> items = new List<SelectListItem>();
 
             ISetorRepositorio _setorRepo = new SetorRepositorio();
