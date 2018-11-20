@@ -30,10 +30,16 @@ namespace PIM.Models
             return new ApplicationDbContext();
         }
 
-        public System.Data.Entity.DbSet<PIM.Models.Chamado> Chamadoes { get; set; }
+        public System.Data.Entity.DbSet<PIM.Models.Objects.Chamado> Chamados { get; set; }
 
         public System.Data.Entity.DbSet<PIM.Models.Setor> Setors { get; set; }
 
         public System.Data.Entity.DbSet<PIM.Models.Departamento> Departamentoes { get; set; }
+
+        public System.Data.Entity.DbSet<PIM.Models.Objects.Cliente> Clientes { get; set; }
+
+        public System.Data.Entity.DbSet<PIM.Models.Objects.Funcionario> Funcionarios { get; set; }
+
+        public System.Data.Entity.DbSet<PIM.Models.Objects.GrauUrgencia> GrauUrgencias { get; set; }
     }
 }

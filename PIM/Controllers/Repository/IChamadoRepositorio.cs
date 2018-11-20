@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using PIM.Models;
+using PIM.Models.Objects;
 
 namespace PIM.Controllers.Repository
 {
-    interface IChamadoRepositorio
+    public interface IChamadoRepositorio
     {
         IEnumerable<Chamado> GetChamado();
         Chamado GetChamadoPorID(int chamadoID);

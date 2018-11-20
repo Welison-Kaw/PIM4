@@ -4,7 +4,6 @@ using System.Linq;
 using System.Web;
 using PIM.DAL;
 using PIM.Controllers.Repository;
-//using System.Collections;
 
 namespace PIM.Models.Repository
 {
@@ -33,7 +32,6 @@ namespace PIM.Models.Repository
                     {
                         id = departamentoDados.ID,
                         Nome = departamentoDados.NOME,
-                        //SetorID = departamentoDados.SETORID
                         Setor = new Setor() { id = departamentoDados.SETORID, Nome = departamentoDados.SETORNOME }
                     });
                 }

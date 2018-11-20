@@ -283,7 +283,6 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
-    <Compile Include="Models\Chamado.cs" />
     <Compile Include="Models\Objects\Chamado.cs" />
     <Compile Include="Models\Objects\Cliente.cs" />
     <Compile Include="Models\Objects\Departamento.cs" />
@@ -291,6 +290,7 @@
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Objects\Funcionario.cs" />
     <Compile Include="Models\Objects\GrauUrgencia.cs" />
+    <Compile Include="Models\Repository\ChamadoRepositorio.cs" />
     <Compile Include="Models\Repository\DepartamentoRepositorio.cs" />
     <Compile Include="Models\Repository\SetorRepositorio.cs" />
     <Compile Include="Models\Objects\Setor.cs" />
@@ -371,10 +371,10 @@
     <Content Include="Views\Departamento\Delete.cshtml" />
     <Content Include="Views\Departamento\Create.cshtml" />
     <Content Include="Views\Departamento\Edit.cshtml" />
+    <Content Include="Views\Chamado\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Chamado\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

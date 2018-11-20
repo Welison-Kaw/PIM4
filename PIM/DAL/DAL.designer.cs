@@ -33,18 +33,18 @@ namespace PIM.DAL
     partial void InsertSETOR(SETOR instance);
     partial void UpdateSETOR(SETOR instance);
     partial void DeleteSETOR(SETOR instance);
-    partial void InsertGRAU_URGENCIA(GRAU_URGENCIA instance);
-    partial void UpdateGRAU_URGENCIA(GRAU_URGENCIA instance);
-    partial void DeleteGRAU_URGENCIA(GRAU_URGENCIA instance);
-    partial void InsertFUNCIONARIO(FUNCIONARIO instance);
-    partial void UpdateFUNCIONARIO(FUNCIONARIO instance);
-    partial void DeleteFUNCIONARIO(FUNCIONARIO instance);
-    partial void InsertDEPARTAMENTO(DEPARTAMENTO instance);
-    partial void UpdateDEPARTAMENTO(DEPARTAMENTO instance);
-    partial void DeleteDEPARTAMENTO(DEPARTAMENTO instance);
     partial void InsertCLIENTE(CLIENTE instance);
     partial void UpdateCLIENTE(CLIENTE instance);
     partial void DeleteCLIENTE(CLIENTE instance);
+    partial void InsertDEPARTAMENTO(DEPARTAMENTO instance);
+    partial void UpdateDEPARTAMENTO(DEPARTAMENTO instance);
+    partial void DeleteDEPARTAMENTO(DEPARTAMENTO instance);
+    partial void InsertFUNCIONARIO(FUNCIONARIO instance);
+    partial void UpdateFUNCIONARIO(FUNCIONARIO instance);
+    partial void DeleteFUNCIONARIO(FUNCIONARIO instance);
+    partial void InsertGRAU_URGENCIA(GRAU_URGENCIA instance);
+    partial void UpdateGRAU_URGENCIA(GRAU_URGENCIA instance);
+    partial void DeleteGRAU_URGENCIA(GRAU_URGENCIA instance);
     partial void InsertCHAMADO(CHAMADO instance);
     partial void UpdateCHAMADO(CHAMADO instance);
     partial void DeleteCHAMADO(CHAMADO instance);
@@ -88,19 +88,11 @@ namespace PIM.DAL
 			}
 		}
 		
-		public System.Data.Linq.Table<GRAU_URGENCIA> GRAU_URGENCIAs
+		public System.Data.Linq.Table<CLIENTE> CLIENTEs
 		{
 			get
 			{
-				return this.GetTable<GRAU_URGENCIA>();
-			}
-		}
-		
-		public System.Data.Linq.Table<FUNCIONARIO> FUNCIONARIOs
-		{
-			get
-			{
-				return this.GetTable<FUNCIONARIO>();
+				return this.GetTable<CLIENTE>();
 			}
 		}
 		
@@ -112,11 +104,19 @@ namespace PIM.DAL
 			}
 		}
 		
-		public System.Data.Linq.Table<CLIENTE> CLIENTEs
+		public System.Data.Linq.Table<FUNCIONARIO> FUNCIONARIOs
 		{
 			get
 			{
-				return this.GetTable<CLIENTE>();
+				return this.GetTable<FUNCIONARIO>();
+			}
+		}
+		
+		public System.Data.Linq.Table<GRAU_URGENCIA> GRAU_URGENCIAs
+		{
+			get
+			{
+				return this.GetTable<GRAU_URGENCIA>();
 			}
 		}
 		
@@ -243,94 +243,8 @@ namespace PIM.DAL
 		}
 	}
 	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.GRAU_URGENCIA")]
-	public partial class GRAU_URGENCIA : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _ID;
-		
-		private string _NOME;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnIDChanging(int value);
-    partial void OnIDChanged();
-    partial void OnNOMEChanging(string value);
-    partial void OnNOMEChanged();
-    #endregion
-		
-		public GRAU_URGENCIA()
-		{
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int ID
-		{
-			get
-			{
-				return this._ID;
-			}
-			set
-			{
-				if ((this._ID != value))
-				{
-					this.OnIDChanging(value);
-					this.SendPropertyChanging();
-					this._ID = value;
-					this.SendPropertyChanged("ID");
-					this.OnIDChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_NOME", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
-		public string NOME
-		{
-			get
-			{
-				return this._NOME;
-			}
-			set
-			{
-				if ((this._NOME != value))
-				{
-					this.OnNOMEChanging(value);
-					this.SendPropertyChanging();
-					this._NOME = value;
-					this.SendPropertyChanged("NOME");
-					this.OnNOMEChanged();
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.FUNCIONARIO")]
-	public partial class FUNCIONARIO : INotifyPropertyChanging, INotifyPropertyChanged
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.CLIENTE")]
+	public partial class CLIENTE : INotifyPropertyChanging, INotifyPropertyChanged
 	{
 		
 		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
@@ -344,6 +258,8 @@ namespace PIM.DAL
 		private string _SENHA;
 		
 		private int _DEPARTAMENTO;
+		
+		private EntitySet<CHAMADO> _CHAMADOs;
 		
 		private EntityRef<DEPARTAMENTO> _DEPARTAMENTO1;
 		
@@ -363,8 +279,9 @@ namespace PIM.DAL
     partial void OnDEPARTAMENTOChanged();
     #endregion
 		
-		public FUNCIONARIO()
+		public CLIENTE()
 		{
+			this._CHAMADOs = new EntitySet<CHAMADO>(new Action<CHAMADO>(this.attach_CHAMADOs), new Action<CHAMADO>(this.detach_CHAMADOs));
 			this._DEPARTAMENTO1 = default(EntityRef<DEPARTAMENTO>);
 			OnCreated();
 		}
@@ -473,7 +390,20 @@ namespace PIM.DAL
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="DEPARTAMENTO_FUNCIONARIO", Storage="_DEPARTAMENTO1", ThisKey="DEPARTAMENTO", OtherKey="ID", IsForeignKey=true)]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="CLIENTE_CHAMADO", Storage="_CHAMADOs", ThisKey="ID", OtherKey="CLIENTE")]
+		public EntitySet<CHAMADO> CHAMADOs
+		{
+			get
+			{
+				return this._CHAMADOs;
+			}
+			set
+			{
+				this._CHAMADOs.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="DEPARTAMENTO_CLIENTE", Storage="_DEPARTAMENTO1", ThisKey="DEPARTAMENTO", OtherKey="ID", IsForeignKey=true)]
 		public DEPARTAMENTO DEPARTAMENTO1
 		{
 			get
@@ -490,12 +420,12 @@ namespace PIM.DAL
 					if ((previousValue != null))
 					{
 						this._DEPARTAMENTO1.Entity = null;
-						previousValue.FUNCIONARIOs.Remove(this);
+						previousValue.CLIENTEs.Remove(this);
 					}
 					this._DEPARTAMENTO1.Entity = value;
 					if ((value != null))
 					{
-						value.FUNCIONARIOs.Add(this);
+						value.CLIENTEs.Add(this);
 						this._DEPARTAMENTO = value.ID;
 					}
 					else
@@ -526,6 +456,18 @@ namespace PIM.DAL
 				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
 		}
+		
+		private void attach_CHAMADOs(CHAMADO entity)
+		{
+			this.SendPropertyChanging();
+			entity.CLIENTE1 = this;
+		}
+		
+		private void detach_CHAMADOs(CHAMADO entity)
+		{
+			this.SendPropertyChanging();
+			entity.CLIENTE1 = null;
+		}
 	}
 	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.DEPARTAMENTO")]
@@ -540,9 +482,11 @@ namespace PIM.DAL
 		
 		private System.Nullable<int> _SETOR;
 		
+		private EntitySet<CLIENTE> _CLIENTEs;
+		
 		private EntitySet<FUNCIONARIO> _FUNCIONARIOs;
 		
-		private EntitySet<CLIENTE> _CLIENTEs;
+		private EntitySet<CHAMADO> _CHAMADOs;
 		
 		private EntityRef<SETOR> _SETOR1;
 		
@@ -560,8 +504,9 @@ namespace PIM.DAL
 		
 		public DEPARTAMENTO()
 		{
-			this._FUNCIONARIOs = new EntitySet<FUNCIONARIO>(new Action<FUNCIONARIO>(this.attach_FUNCIONARIOs), new Action<FUNCIONARIO>(this.detach_FUNCIONARIOs));
 			this._CLIENTEs = new EntitySet<CLIENTE>(new Action<CLIENTE>(this.attach_CLIENTEs), new Action<CLIENTE>(this.detach_CLIENTEs));
+			this._FUNCIONARIOs = new EntitySet<FUNCIONARIO>(new Action<FUNCIONARIO>(this.attach_FUNCIONARIOs), new Action<FUNCIONARIO>(this.detach_FUNCIONARIOs));
+			this._CHAMADOs = new EntitySet<CHAMADO>(new Action<CHAMADO>(this.attach_CHAMADOs), new Action<CHAMADO>(this.detach_CHAMADOs));
 			this._SETOR1 = default(EntityRef<SETOR>);
 			OnCreated();
 		}
@@ -630,6 +575,19 @@ namespace PIM.DAL
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="DEPARTAMENTO_CLIENTE", Storage="_CLIENTEs", ThisKey="ID", OtherKey="DEPARTAMENTO")]
+		public EntitySet<CLIENTE> CLIENTEs
+		{
+			get
+			{
+				return this._CLIENTEs;
+			}
+			set
+			{
+				this._CLIENTEs.Assign(value);
+			}
+		}
+		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="DEPARTAMENTO_FUNCIONARIO", Storage="_FUNCIONARIOs", ThisKey="ID", OtherKey="DEPARTAMENTO")]
 		public EntitySet<FUNCIONARIO> FUNCIONARIOs
 		{
@@ -643,16 +601,16 @@ namespace PIM.DAL
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="DEPARTAMENTO_CLIENTE", Storage="_CLIENTEs", ThisKey="ID", OtherKey="DEPARTAMENTO")]
-		public EntitySet<CLIENTE> CLIENTEs
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="DEPARTAMENTO_CHAMADO", Storage="_CHAMADOs", ThisKey="ID", OtherKey="DEPARTAMENTO")]
+		public EntitySet<CHAMADO> CHAMADOs
 		{
 			get
 			{
-				return this._CLIENTEs;
+				return this._CHAMADOs;
 			}
 			set
 			{
-				this._CLIENTEs.Assign(value);
+				this._CHAMADOs.Assign(value);
 			}
 		}
 		
@@ -710,6 +668,18 @@ namespace PIM.DAL
 			}
 		}
 		
+		private void attach_CLIENTEs(CLIENTE entity)
+		{
+			this.SendPropertyChanging();
+			entity.DEPARTAMENTO1 = this;
+		}
+		
+		private void detach_CLIENTEs(CLIENTE entity)
+		{
+			this.SendPropertyChanging();
+			entity.DEPARTAMENTO1 = null;
+		}
+		
 		private void attach_FUNCIONARIOs(FUNCIONARIO entity)
 		{
 			this.SendPropertyChanging();
@@ -722,21 +692,21 @@ namespace PIM.DAL
 			entity.DEPARTAMENTO1 = null;
 		}
 		
-		private void attach_CLIENTEs(CLIENTE entity)
+		private void attach_CHAMADOs(CHAMADO entity)
 		{
 			this.SendPropertyChanging();
 			entity.DEPARTAMENTO1 = this;
 		}
 		
-		private void detach_CLIENTEs(CLIENTE entity)
+		private void detach_CHAMADOs(CHAMADO entity)
 		{
 			this.SendPropertyChanging();
 			entity.DEPARTAMENTO1 = null;
 		}
 	}
 	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.CLIENTE")]
-	public partial class CLIENTE : INotifyPropertyChanging, INotifyPropertyChanged
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.FUNCIONARIO")]
+	public partial class FUNCIONARIO : INotifyPropertyChanging, INotifyPropertyChanged
 	{
 		
 		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
@@ -750,6 +720,8 @@ namespace PIM.DAL
 		private string _SENHA;
 		
 		private int _DEPARTAMENTO;
+		
+		private EntitySet<CHAMADO> _CHAMADOs;
 		
 		private EntityRef<DEPARTAMENTO> _DEPARTAMENTO1;
 		
@@ -769,8 +741,9 @@ namespace PIM.DAL
     partial void OnDEPARTAMENTOChanged();
     #endregion
 		
-		public CLIENTE()
+		public FUNCIONARIO()
 		{
+			this._CHAMADOs = new EntitySet<CHAMADO>(new Action<CHAMADO>(this.attach_CHAMADOs), new Action<CHAMADO>(this.detach_CHAMADOs));
 			this._DEPARTAMENTO1 = default(EntityRef<DEPARTAMENTO>);
 			OnCreated();
 		}
@@ -879,7 +852,20 @@ namespace PIM.DAL
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="DEPARTAMENTO_CLIENTE", Storage="_DEPARTAMENTO1", ThisKey="DEPARTAMENTO", OtherKey="ID", IsForeignKey=true)]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="FUNCIONARIO_CHAMADO", Storage="_CHAMADOs", ThisKey="ID", OtherKey="FUNCIONARIO")]
+		public EntitySet<CHAMADO> CHAMADOs
+		{
+			get
+			{
+				return this._CHAMADOs;
+			}
+			set
+			{
+				this._CHAMADOs.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="DEPARTAMENTO_FUNCIONARIO", Storage="_DEPARTAMENTO1", ThisKey="DEPARTAMENTO", OtherKey="ID", IsForeignKey=true)]
 		public DEPARTAMENTO DEPARTAMENTO1
 		{
 			get
@@ -896,12 +882,12 @@ namespace PIM.DAL
 					if ((previousValue != null))
 					{
 						this._DEPARTAMENTO1.Entity = null;
-						previousValue.CLIENTEs.Remove(this);
+						previousValue.FUNCIONARIOs.Remove(this);
 					}
 					this._DEPARTAMENTO1.Entity = value;
 					if ((value != null))
 					{
-						value.CLIENTEs.Add(this);
+						value.FUNCIONARIOs.Add(this);
 						this._DEPARTAMENTO = value.ID;
 					}
 					else
@@ -932,6 +918,132 @@ namespace PIM.DAL
 				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
 		}
+		
+		private void attach_CHAMADOs(CHAMADO entity)
+		{
+			this.SendPropertyChanging();
+			entity.FUNCIONARIO1 = this;
+		}
+		
+		private void detach_CHAMADOs(CHAMADO entity)
+		{
+			this.SendPropertyChanging();
+			entity.FUNCIONARIO1 = null;
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.GRAU_URGENCIA")]
+	public partial class GRAU_URGENCIA : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _ID;
+		
+		private string _NOME;
+		
+		private EntitySet<CHAMADO> _CHAMADOs;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnIDChanging(int value);
+    partial void OnIDChanged();
+    partial void OnNOMEChanging(string value);
+    partial void OnNOMEChanged();
+    #endregion
+		
+		public GRAU_URGENCIA()
+		{
+			this._CHAMADOs = new EntitySet<CHAMADO>(new Action<CHAMADO>(this.attach_CHAMADOs), new Action<CHAMADO>(this.detach_CHAMADOs));
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int ID
+		{
+			get
+			{
+				return this._ID;
+			}
+			set
+			{
+				if ((this._ID != value))
+				{
+					this.OnIDChanging(value);
+					this.SendPropertyChanging();
+					this._ID = value;
+					this.SendPropertyChanged("ID");
+					this.OnIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_NOME", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+		public string NOME
+		{
+			get
+			{
+				return this._NOME;
+			}
+			set
+			{
+				if ((this._NOME != value))
+				{
+					this.OnNOMEChanging(value);
+					this.SendPropertyChanging();
+					this._NOME = value;
+					this.SendPropertyChanged("NOME");
+					this.OnNOMEChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="GRAU_URGENCIA_CHAMADO", Storage="_CHAMADOs", ThisKey="ID", OtherKey="GRAU_URGENCIA")]
+		public EntitySet<CHAMADO> CHAMADOs
+		{
+			get
+			{
+				return this._CHAMADOs;
+			}
+			set
+			{
+				this._CHAMADOs.Assign(value);
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_CHAMADOs(CHAMADO entity)
+		{
+			this.SendPropertyChanging();
+			entity.GRAU_URGENCIA1 = this;
+		}
+		
+		private void detach_CHAMADOs(CHAMADO entity)
+		{
+			this.SendPropertyChanging();
+			entity.GRAU_URGENCIA1 = null;
+		}
 	}
 	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.CHAMADO")]
@@ -948,7 +1060,7 @@ namespace PIM.DAL
 		
 		private string _ANDAR;
 		
-		private string _EQUIPAMENTO;
+		private string _TITULO;
 		
 		private string _DESCRICAO;
 		
@@ -956,7 +1068,15 @@ namespace PIM.DAL
 		
 		private System.Nullable<int> _FUNCIONARIO;
 		
-		private System.Nullable<System.TimeSpan> _CONCLUSAO;
+		private System.Nullable<System.DateTime> _CONCLUSAO;
+		
+		private EntityRef<CLIENTE> _CLIENTE1;
+		
+		private EntityRef<DEPARTAMENTO> _DEPARTAMENTO1;
+		
+		private EntityRef<FUNCIONARIO> _FUNCIONARIO1;
+		
+		private EntityRef<GRAU_URGENCIA> _GRAU_URGENCIA1;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -970,20 +1090,24 @@ namespace PIM.DAL
     partial void OnGRAU_URGENCIAChanged();
     partial void OnANDARChanging(string value);
     partial void OnANDARChanged();
-    partial void OnEQUIPAMENTOChanging(string value);
-    partial void OnEQUIPAMENTOChanged();
+    partial void OnTITULOChanging(string value);
+    partial void OnTITULOChanged();
     partial void OnDESCRICAOChanging(string value);
     partial void OnDESCRICAOChanged();
     partial void OnCLIENTEChanging(int value);
     partial void OnCLIENTEChanged();
     partial void OnFUNCIONARIOChanging(System.Nullable<int> value);
     partial void OnFUNCIONARIOChanged();
-    partial void OnCONCLUSAOChanging(System.Nullable<System.TimeSpan> value);
+    partial void OnCONCLUSAOChanging(System.Nullable<System.DateTime> value);
     partial void OnCONCLUSAOChanged();
     #endregion
 		
 		public CHAMADO()
 		{
+			this._CLIENTE1 = default(EntityRef<CLIENTE>);
+			this._DEPARTAMENTO1 = default(EntityRef<DEPARTAMENTO>);
+			this._FUNCIONARIO1 = default(EntityRef<FUNCIONARIO>);
+			this._GRAU_URGENCIA1 = default(EntityRef<GRAU_URGENCIA>);
 			OnCreated();
 		}
 		
@@ -1018,6 +1142,10 @@ namespace PIM.DAL
 			{
 				if ((this._DEPARTAMENTO != value))
 				{
+					if (this._DEPARTAMENTO1.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
 					this.OnDEPARTAMENTOChanging(value);
 					this.SendPropertyChanging();
 					this._DEPARTAMENTO = value;
@@ -1038,6 +1166,10 @@ namespace PIM.DAL
 			{
 				if ((this._GRAU_URGENCIA != value))
 				{
+					if (this._GRAU_URGENCIA1.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
 					this.OnGRAU_URGENCIAChanging(value);
 					this.SendPropertyChanging();
 					this._GRAU_URGENCIA = value;
@@ -1067,22 +1199,22 @@ namespace PIM.DAL
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_EQUIPAMENTO", DbType="VarChar(100) NOT NULL", CanBeNull=false)]
-		public string EQUIPAMENTO
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TITULO", DbType="VarChar(100) NOT NULL", CanBeNull=false)]
+		public string TITULO
 		{
 			get
 			{
-				return this._EQUIPAMENTO;
+				return this._TITULO;
 			}
 			set
 			{
-				if ((this._EQUIPAMENTO != value))
+				if ((this._TITULO != value))
 				{
-					this.OnEQUIPAMENTOChanging(value);
+					this.OnTITULOChanging(value);
 					this.SendPropertyChanging();
-					this._EQUIPAMENTO = value;
-					this.SendPropertyChanged("EQUIPAMENTO");
-					this.OnEQUIPAMENTOChanged();
+					this._TITULO = value;
+					this.SendPropertyChanged("TITULO");
+					this.OnTITULOChanged();
 				}
 			}
 		}
@@ -1118,6 +1250,10 @@ namespace PIM.DAL
 			{
 				if ((this._CLIENTE != value))
 				{
+					if (this._CLIENTE1.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
 					this.OnCLIENTEChanging(value);
 					this.SendPropertyChanging();
 					this._CLIENTE = value;
@@ -1138,6 +1274,10 @@ namespace PIM.DAL
 			{
 				if ((this._FUNCIONARIO != value))
 				{
+					if (this._FUNCIONARIO1.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
 					this.OnFUNCIONARIOChanging(value);
 					this.SendPropertyChanging();
 					this._FUNCIONARIO = value;
@@ -1147,8 +1287,8 @@ namespace PIM.DAL
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CONCLUSAO", DbType="Time")]
-		public System.Nullable<System.TimeSpan> CONCLUSAO
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CONCLUSAO", DbType="DateTime")]
+		public System.Nullable<System.DateTime> CONCLUSAO
 		{
 			get
 			{
@@ -1163,6 +1303,142 @@ namespace PIM.DAL
 					this._CONCLUSAO = value;
 					this.SendPropertyChanged("CONCLUSAO");
 					this.OnCONCLUSAOChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="CLIENTE_CHAMADO", Storage="_CLIENTE1", ThisKey="CLIENTE", OtherKey="ID", IsForeignKey=true)]
+		public CLIENTE CLIENTE1
+		{
+			get
+			{
+				return this._CLIENTE1.Entity;
+			}
+			set
+			{
+				CLIENTE previousValue = this._CLIENTE1.Entity;
+				if (((previousValue != value) 
+							|| (this._CLIENTE1.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._CLIENTE1.Entity = null;
+						previousValue.CHAMADOs.Remove(this);
+					}
+					this._CLIENTE1.Entity = value;
+					if ((value != null))
+					{
+						value.CHAMADOs.Add(this);
+						this._CLIENTE = value.ID;
+					}
+					else
+					{
+						this._CLIENTE = default(int);
+					}
+					this.SendPropertyChanged("CLIENTE1");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="DEPARTAMENTO_CHAMADO", Storage="_DEPARTAMENTO1", ThisKey="DEPARTAMENTO", OtherKey="ID", IsForeignKey=true)]
+		public DEPARTAMENTO DEPARTAMENTO1
+		{
+			get
+			{
+				return this._DEPARTAMENTO1.Entity;
+			}
+			set
+			{
+				DEPARTAMENTO previousValue = this._DEPARTAMENTO1.Entity;
+				if (((previousValue != value) 
+							|| (this._DEPARTAMENTO1.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._DEPARTAMENTO1.Entity = null;
+						previousValue.CHAMADOs.Remove(this);
+					}
+					this._DEPARTAMENTO1.Entity = value;
+					if ((value != null))
+					{
+						value.CHAMADOs.Add(this);
+						this._DEPARTAMENTO = value.ID;
+					}
+					else
+					{
+						this._DEPARTAMENTO = default(int);
+					}
+					this.SendPropertyChanged("DEPARTAMENTO1");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="FUNCIONARIO_CHAMADO", Storage="_FUNCIONARIO1", ThisKey="FUNCIONARIO", OtherKey="ID", IsForeignKey=true)]
+		public FUNCIONARIO FUNCIONARIO1
+		{
+			get
+			{
+				return this._FUNCIONARIO1.Entity;
+			}
+			set
+			{
+				FUNCIONARIO previousValue = this._FUNCIONARIO1.Entity;
+				if (((previousValue != value) 
+							|| (this._FUNCIONARIO1.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._FUNCIONARIO1.Entity = null;
+						previousValue.CHAMADOs.Remove(this);
+					}
+					this._FUNCIONARIO1.Entity = value;
+					if ((value != null))
+					{
+						value.CHAMADOs.Add(this);
+						this._FUNCIONARIO = value.ID;
+					}
+					else
+					{
+						this._FUNCIONARIO = default(Nullable<int>);
+					}
+					this.SendPropertyChanged("FUNCIONARIO1");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="GRAU_URGENCIA_CHAMADO", Storage="_GRAU_URGENCIA1", ThisKey="GRAU_URGENCIA", OtherKey="ID", IsForeignKey=true)]
+		public GRAU_URGENCIA GRAU_URGENCIA1
+		{
+			get
+			{
+				return this._GRAU_URGENCIA1.Entity;
+			}
+			set
+			{
+				GRAU_URGENCIA previousValue = this._GRAU_URGENCIA1.Entity;
+				if (((previousValue != value) 
+							|| (this._GRAU_URGENCIA1.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._GRAU_URGENCIA1.Entity = null;
+						previousValue.CHAMADOs.Remove(this);
+					}
+					this._GRAU_URGENCIA1.Entity = value;
+					if ((value != null))
+					{
+						value.CHAMADOs.Add(this);
+						this._GRAU_URGENCIA = value.ID;
+					}
+					else
+					{
+						this._GRAU_URGENCIA = default(int);
+					}
+					this.SendPropertyChanged("GRAU_URGENCIA1");
 				}
 			}
 		}
