@@ -266,9 +266,11 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\ChamadoController.cs" />
     <Compile Include="Controllers\DepartamentoController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\Repository\IChamadoRepositorio.cs" />
     <Compile Include="Controllers\Repository\IDepartamentoRepositorio.cs" />
     <Compile Include="Controllers\Repository\ISetorRepositorio.cs" />
     <Compile Include="Controllers\SetorController.cs" />
@@ -359,12 +361,12 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
-    <Content Include="Views\Setor\Lista.cshtml" />
+    <Content Include="Views\Setor\Index.cshtml" />
     <Content Include="Views\Setor\Delete.cshtml" />
     <Content Include="Views\Setor\Details.cshtml" />
     <Content Include="Views\Setor\Create.cshtml" />
     <Content Include="Views\Setor\Edit.cshtml" />
-    <Content Include="Views\Departamento\Lista.cshtml" />
+    <Content Include="Views\Departamento\Index.cshtml" />
     <Content Include="Views\Departamento\Details.cshtml" />
     <Content Include="Views\Departamento\Delete.cshtml" />
     <Content Include="Views\Departamento\Create.cshtml" />
@@ -372,6 +374,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Chamado\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

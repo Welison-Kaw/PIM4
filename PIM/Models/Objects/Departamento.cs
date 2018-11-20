@@ -9,8 +9,6 @@ namespace PIM.Models
 {
     public class Departamento
     {
-        //private EntityRef<Setor> _Setor;
-
         [Display(Name = "Código")]
         public int id { get; set; }
         public string Nome { get; set; }

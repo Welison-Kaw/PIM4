@@ -24,7 +24,7 @@ namespace PIM.Controllers
             _repositorio = repositorio;
         }
 
-        public ActionResult Lista()
+        public ActionResult Index()
         {
             var setor = _repositorio.GetSetor();
             return View(setor);
@@ -48,7 +48,7 @@ namespace PIM.Controllers
                 if (ModelState.IsValid)
                 {
                     _repositorio.InserirSetor(setor);
-                    return RedirectToAction("Lista");
+                    return RedirectToAction("Index");
                 }
             }
             catch (DataException)
@@ -71,7 +71,7 @@ namespace PIM.Controllers
                 if (ModelState.IsValid)
                 {
                     _repositorio.AtualizarSetor(setor);
-                    return RedirectToAction("Lista");
+                    return RedirectToAction("Index");
                 }
             }
             catch (DataException)
@@ -102,7 +102,7 @@ namespace PIM.Controllers
             {
                 return RedirectToAction("Delete", new System.Web.Routing.RouteValueDictionary { { "id", id }, { "saveChangesError", true } });
             }
-            return RedirectToAction("Lista");
+            return RedirectToAction("Index");
         }
     }
 }
