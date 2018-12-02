@@ -30,9 +30,15 @@ namespace PIM.DAL
 		
     #region Extensibility Method Definitions
     partial void OnCreated();
+    partial void InsertATRIBUICAO(ATRIBUICAO instance);
+    partial void UpdateATRIBUICAO(ATRIBUICAO instance);
+    partial void DeleteATRIBUICAO(ATRIBUICAO instance);
     partial void InsertSETOR(SETOR instance);
     partial void UpdateSETOR(SETOR instance);
     partial void DeleteSETOR(SETOR instance);
+    partial void InsertCHAMADO(CHAMADO instance);
+    partial void UpdateCHAMADO(CHAMADO instance);
+    partial void DeleteCHAMADO(CHAMADO instance);
     partial void InsertCLIENTE(CLIENTE instance);
     partial void UpdateCLIENTE(CLIENTE instance);
     partial void DeleteCLIENTE(CLIENTE instance);
@@ -45,9 +51,6 @@ namespace PIM.DAL
     partial void InsertGRAU_URGENCIA(GRAU_URGENCIA instance);
     partial void UpdateGRAU_URGENCIA(GRAU_URGENCIA instance);
     partial void DeleteGRAU_URGENCIA(GRAU_URGENCIA instance);
-    partial void InsertCHAMADO(CHAMADO instance);
-    partial void UpdateCHAMADO(CHAMADO instance);
-    partial void DeleteCHAMADO(CHAMADO instance);
     #endregion
 		
 		public DALDataContext() : 
@@ -80,11 +83,27 @@ namespace PIM.DAL
 			OnCreated();
 		}
 		
+		public System.Data.Linq.Table<ATRIBUICAO> ATRIBUICAOs
+		{
+			get
+			{
+				return this.GetTable<ATRIBUICAO>();
+			}
+		}
+		
 		public System.Data.Linq.Table<SETOR> SETORs
 		{
 			get
 			{
 				return this.GetTable<SETOR>();
+			}
+		}
+		
+		public System.Data.Linq.Table<CHAMADO> CHAMADOs
+		{
+			get
+			{
+				return this.GetTable<CHAMADO>();
 			}
 		}
 		
@@ -119,13 +138,119 @@ namespace PIM.DAL
 				return this.GetTable<GRAU_URGENCIA>();
 			}
 		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.ATRIBUICAO")]
+	public partial class ATRIBUICAO : INotifyPropertyChanging, INotifyPropertyChanged
+	{
 		
-		public System.Data.Linq.Table<CHAMADO> CHAMADOs
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _ID;
+		
+		private string _NOME;
+		
+		private EntitySet<CHAMADO> _CHAMADOs;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnIDChanging(int value);
+    partial void OnIDChanged();
+    partial void OnNOMEChanging(string value);
+    partial void OnNOMEChanged();
+    #endregion
+		
+		public ATRIBUICAO()
+		{
+			this._CHAMADOs = new EntitySet<CHAMADO>(new Action<CHAMADO>(this.attach_CHAMADOs), new Action<CHAMADO>(this.detach_CHAMADOs));
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int ID
 		{
 			get
 			{
-				return this.GetTable<CHAMADO>();
+				return this._ID;
 			}
+			set
+			{
+				if ((this._ID != value))
+				{
+					this.OnIDChanging(value);
+					this.SendPropertyChanging();
+					this._ID = value;
+					this.SendPropertyChanged("ID");
+					this.OnIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_NOME", DbType="VarChar(100) NOT NULL", CanBeNull=false)]
+		public string NOME
+		{
+			get
+			{
+				return this._NOME;
+			}
+			set
+			{
+				if ((this._NOME != value))
+				{
+					this.OnNOMEChanging(value);
+					this.SendPropertyChanging();
+					this._NOME = value;
+					this.SendPropertyChanged("NOME");
+					this.OnNOMEChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="ATRIBUICAO_CHAMADO", Storage="_CHAMADOs", ThisKey="ID", OtherKey="ATRIBUICAO")]
+		public EntitySet<CHAMADO> CHAMADOs
+		{
+			get
+			{
+				return this._CHAMADOs;
+			}
+			set
+			{
+				this._CHAMADOs.Assign(value);
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_CHAMADOs(CHAMADO entity)
+		{
+			this.SendPropertyChanging();
+			entity.ATRIBUICAO1 = this;
+		}
+		
+		private void detach_CHAMADOs(CHAMADO entity)
+		{
+			this.SendPropertyChanging();
+			entity.ATRIBUICAO1 = null;
 		}
 	}
 	
@@ -240,6 +365,465 @@ namespace PIM.DAL
 		{
 			this.SendPropertyChanging();
 			entity.SETOR1 = null;
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.CHAMADO")]
+	public partial class CHAMADO : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _ID;
+		
+		private int _DEPARTAMENTO;
+		
+		private int _GRAU_URGENCIA;
+		
+		private string _TITULO;
+		
+		private string _DESCRICAO;
+		
+		private int _CLIENTE;
+		
+		private System.Nullable<int> _FUNCIONARIO;
+		
+		private int _ATRIBUICAO;
+		
+		private System.Nullable<System.DateTime> _CONCLUSAO;
+		
+		private EntityRef<ATRIBUICAO> _ATRIBUICAO1;
+		
+		private EntityRef<CLIENTE> _CLIENTE1;
+		
+		private EntityRef<DEPARTAMENTO> _DEPARTAMENTO1;
+		
+		private EntityRef<FUNCIONARIO> _FUNCIONARIO1;
+		
+		private EntityRef<GRAU_URGENCIA> _GRAU_URGENCIA1;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnIDChanging(int value);
+    partial void OnIDChanged();
+    partial void OnDEPARTAMENTOChanging(int value);
+    partial void OnDEPARTAMENTOChanged();
+    partial void OnGRAU_URGENCIAChanging(int value);
+    partial void OnGRAU_URGENCIAChanged();
+    partial void OnTITULOChanging(string value);
+    partial void OnTITULOChanged();
+    partial void OnDESCRICAOChanging(string value);
+    partial void OnDESCRICAOChanged();
+    partial void OnCLIENTEChanging(int value);
+    partial void OnCLIENTEChanged();
+    partial void OnFUNCIONARIOChanging(System.Nullable<int> value);
+    partial void OnFUNCIONARIOChanged();
+    partial void OnATRIBUICAOChanging(int value);
+    partial void OnATRIBUICAOChanged();
+    partial void OnCONCLUSAOChanging(System.Nullable<System.DateTime> value);
+    partial void OnCONCLUSAOChanged();
+    #endregion
+		
+		public CHAMADO()
+		{
+			this._ATRIBUICAO1 = default(EntityRef<ATRIBUICAO>);
+			this._CLIENTE1 = default(EntityRef<CLIENTE>);
+			this._DEPARTAMENTO1 = default(EntityRef<DEPARTAMENTO>);
+			this._FUNCIONARIO1 = default(EntityRef<FUNCIONARIO>);
+			this._GRAU_URGENCIA1 = default(EntityRef<GRAU_URGENCIA>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int ID
+		{
+			get
+			{
+				return this._ID;
+			}
+			set
+			{
+				if ((this._ID != value))
+				{
+					this.OnIDChanging(value);
+					this.SendPropertyChanging();
+					this._ID = value;
+					this.SendPropertyChanged("ID");
+					this.OnIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DEPARTAMENTO", DbType="Int NOT NULL")]
+		public int DEPARTAMENTO
+		{
+			get
+			{
+				return this._DEPARTAMENTO;
+			}
+			set
+			{
+				if ((this._DEPARTAMENTO != value))
+				{
+					if (this._DEPARTAMENTO1.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnDEPARTAMENTOChanging(value);
+					this.SendPropertyChanging();
+					this._DEPARTAMENTO = value;
+					this.SendPropertyChanged("DEPARTAMENTO");
+					this.OnDEPARTAMENTOChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_GRAU_URGENCIA", DbType="Int NOT NULL")]
+		public int GRAU_URGENCIA
+		{
+			get
+			{
+				return this._GRAU_URGENCIA;
+			}
+			set
+			{
+				if ((this._GRAU_URGENCIA != value))
+				{
+					if (this._GRAU_URGENCIA1.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnGRAU_URGENCIAChanging(value);
+					this.SendPropertyChanging();
+					this._GRAU_URGENCIA = value;
+					this.SendPropertyChanged("GRAU_URGENCIA");
+					this.OnGRAU_URGENCIAChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TITULO", DbType="VarChar(100) NOT NULL", CanBeNull=false)]
+		public string TITULO
+		{
+			get
+			{
+				return this._TITULO;
+			}
+			set
+			{
+				if ((this._TITULO != value))
+				{
+					this.OnTITULOChanging(value);
+					this.SendPropertyChanging();
+					this._TITULO = value;
+					this.SendPropertyChanged("TITULO");
+					this.OnTITULOChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DESCRICAO", DbType="VarChar(500) NOT NULL", CanBeNull=false)]
+		public string DESCRICAO
+		{
+			get
+			{
+				return this._DESCRICAO;
+			}
+			set
+			{
+				if ((this._DESCRICAO != value))
+				{
+					this.OnDESCRICAOChanging(value);
+					this.SendPropertyChanging();
+					this._DESCRICAO = value;
+					this.SendPropertyChanged("DESCRICAO");
+					this.OnDESCRICAOChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CLIENTE", DbType="Int NOT NULL")]
+		public int CLIENTE
+		{
+			get
+			{
+				return this._CLIENTE;
+			}
+			set
+			{
+				if ((this._CLIENTE != value))
+				{
+					if (this._CLIENTE1.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnCLIENTEChanging(value);
+					this.SendPropertyChanging();
+					this._CLIENTE = value;
+					this.SendPropertyChanged("CLIENTE");
+					this.OnCLIENTEChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FUNCIONARIO", DbType="Int")]
+		public System.Nullable<int> FUNCIONARIO
+		{
+			get
+			{
+				return this._FUNCIONARIO;
+			}
+			set
+			{
+				if ((this._FUNCIONARIO != value))
+				{
+					if (this._FUNCIONARIO1.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnFUNCIONARIOChanging(value);
+					this.SendPropertyChanging();
+					this._FUNCIONARIO = value;
+					this.SendPropertyChanged("FUNCIONARIO");
+					this.OnFUNCIONARIOChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ATRIBUICAO", DbType="Int NOT NULL")]
+		public int ATRIBUICAO
+		{
+			get
+			{
+				return this._ATRIBUICAO;
+			}
+			set
+			{
+				if ((this._ATRIBUICAO != value))
+				{
+					if (this._ATRIBUICAO1.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnATRIBUICAOChanging(value);
+					this.SendPropertyChanging();
+					this._ATRIBUICAO = value;
+					this.SendPropertyChanged("ATRIBUICAO");
+					this.OnATRIBUICAOChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CONCLUSAO", DbType="DateTime")]
+		public System.Nullable<System.DateTime> CONCLUSAO
+		{
+			get
+			{
+				return this._CONCLUSAO;
+			}
+			set
+			{
+				if ((this._CONCLUSAO != value))
+				{
+					this.OnCONCLUSAOChanging(value);
+					this.SendPropertyChanging();
+					this._CONCLUSAO = value;
+					this.SendPropertyChanged("CONCLUSAO");
+					this.OnCONCLUSAOChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="ATRIBUICAO_CHAMADO", Storage="_ATRIBUICAO1", ThisKey="ATRIBUICAO", OtherKey="ID", IsForeignKey=true)]
+		public ATRIBUICAO ATRIBUICAO1
+		{
+			get
+			{
+				return this._ATRIBUICAO1.Entity;
+			}
+			set
+			{
+				ATRIBUICAO previousValue = this._ATRIBUICAO1.Entity;
+				if (((previousValue != value) 
+							|| (this._ATRIBUICAO1.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._ATRIBUICAO1.Entity = null;
+						previousValue.CHAMADOs.Remove(this);
+					}
+					this._ATRIBUICAO1.Entity = value;
+					if ((value != null))
+					{
+						value.CHAMADOs.Add(this);
+						this._ATRIBUICAO = value.ID;
+					}
+					else
+					{
+						this._ATRIBUICAO = default(int);
+					}
+					this.SendPropertyChanged("ATRIBUICAO1");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="CLIENTE_CHAMADO", Storage="_CLIENTE1", ThisKey="CLIENTE", OtherKey="ID", IsForeignKey=true)]
+		public CLIENTE CLIENTE1
+		{
+			get
+			{
+				return this._CLIENTE1.Entity;
+			}
+			set
+			{
+				CLIENTE previousValue = this._CLIENTE1.Entity;
+				if (((previousValue != value) 
+							|| (this._CLIENTE1.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._CLIENTE1.Entity = null;
+						previousValue.CHAMADOs.Remove(this);
+					}
+					this._CLIENTE1.Entity = value;
+					if ((value != null))
+					{
+						value.CHAMADOs.Add(this);
+						this._CLIENTE = value.ID;
+					}
+					else
+					{
+						this._CLIENTE = default(int);
+					}
+					this.SendPropertyChanged("CLIENTE1");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="DEPARTAMENTO_CHAMADO", Storage="_DEPARTAMENTO1", ThisKey="DEPARTAMENTO", OtherKey="ID", IsForeignKey=true)]
+		public DEPARTAMENTO DEPARTAMENTO1
+		{
+			get
+			{
+				return this._DEPARTAMENTO1.Entity;
+			}
+			set
+			{
+				DEPARTAMENTO previousValue = this._DEPARTAMENTO1.Entity;
+				if (((previousValue != value) 
+							|| (this._DEPARTAMENTO1.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._DEPARTAMENTO1.Entity = null;
+						previousValue.CHAMADOs.Remove(this);
+					}
+					this._DEPARTAMENTO1.Entity = value;
+					if ((value != null))
+					{
+						value.CHAMADOs.Add(this);
+						this._DEPARTAMENTO = value.ID;
+					}
+					else
+					{
+						this._DEPARTAMENTO = default(int);
+					}
+					this.SendPropertyChanged("DEPARTAMENTO1");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="FUNCIONARIO_CHAMADO", Storage="_FUNCIONARIO1", ThisKey="FUNCIONARIO", OtherKey="ID", IsForeignKey=true)]
+		public FUNCIONARIO FUNCIONARIO1
+		{
+			get
+			{
+				return this._FUNCIONARIO1.Entity;
+			}
+			set
+			{
+				FUNCIONARIO previousValue = this._FUNCIONARIO1.Entity;
+				if (((previousValue != value) 
+							|| (this._FUNCIONARIO1.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._FUNCIONARIO1.Entity = null;
+						previousValue.CHAMADOs.Remove(this);
+					}
+					this._FUNCIONARIO1.Entity = value;
+					if ((value != null))
+					{
+						value.CHAMADOs.Add(this);
+						this._FUNCIONARIO = value.ID;
+					}
+					else
+					{
+						this._FUNCIONARIO = default(Nullable<int>);
+					}
+					this.SendPropertyChanged("FUNCIONARIO1");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="GRAU_URGENCIA_CHAMADO", Storage="_GRAU_URGENCIA1", ThisKey="GRAU_URGENCIA", OtherKey="ID", IsForeignKey=true)]
+		public GRAU_URGENCIA GRAU_URGENCIA1
+		{
+			get
+			{
+				return this._GRAU_URGENCIA1.Entity;
+			}
+			set
+			{
+				GRAU_URGENCIA previousValue = this._GRAU_URGENCIA1.Entity;
+				if (((previousValue != value) 
+							|| (this._GRAU_URGENCIA1.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._GRAU_URGENCIA1.Entity = null;
+						previousValue.CHAMADOs.Remove(this);
+					}
+					this._GRAU_URGENCIA1.Entity = value;
+					if ((value != null))
+					{
+						value.CHAMADOs.Add(this);
+						this._GRAU_URGENCIA = value.ID;
+					}
+					else
+					{
+						this._GRAU_URGENCIA = default(int);
+					}
+					this.SendPropertyChanged("GRAU_URGENCIA1");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
 		}
 	}
 	
@@ -482,11 +1066,11 @@ namespace PIM.DAL
 		
 		private System.Nullable<int> _SETOR;
 		
+		private EntitySet<CHAMADO> _CHAMADOs;
+		
 		private EntitySet<CLIENTE> _CLIENTEs;
 		
 		private EntitySet<FUNCIONARIO> _FUNCIONARIOs;
-		
-		private EntitySet<CHAMADO> _CHAMADOs;
 		
 		private EntityRef<SETOR> _SETOR1;
 		
@@ -504,9 +1088,9 @@ namespace PIM.DAL
 		
 		public DEPARTAMENTO()
 		{
+			this._CHAMADOs = new EntitySet<CHAMADO>(new Action<CHAMADO>(this.attach_CHAMADOs), new Action<CHAMADO>(this.detach_CHAMADOs));
 			this._CLIENTEs = new EntitySet<CLIENTE>(new Action<CLIENTE>(this.attach_CLIENTEs), new Action<CLIENTE>(this.detach_CLIENTEs));
 			this._FUNCIONARIOs = new EntitySet<FUNCIONARIO>(new Action<FUNCIONARIO>(this.attach_FUNCIONARIOs), new Action<FUNCIONARIO>(this.detach_FUNCIONARIOs));
-			this._CHAMADOs = new EntitySet<CHAMADO>(new Action<CHAMADO>(this.attach_CHAMADOs), new Action<CHAMADO>(this.detach_CHAMADOs));
 			this._SETOR1 = default(EntityRef<SETOR>);
 			OnCreated();
 		}
@@ -575,6 +1159,19 @@ namespace PIM.DAL
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="DEPARTAMENTO_CHAMADO", Storage="_CHAMADOs", ThisKey="ID", OtherKey="DEPARTAMENTO")]
+		public EntitySet<CHAMADO> CHAMADOs
+		{
+			get
+			{
+				return this._CHAMADOs;
+			}
+			set
+			{
+				this._CHAMADOs.Assign(value);
+			}
+		}
+		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="DEPARTAMENTO_CLIENTE", Storage="_CLIENTEs", ThisKey="ID", OtherKey="DEPARTAMENTO")]
 		public EntitySet<CLIENTE> CLIENTEs
 		{
@@ -598,19 +1195,6 @@ namespace PIM.DAL
 			set
 			{
 				this._FUNCIONARIOs.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="DEPARTAMENTO_CHAMADO", Storage="_CHAMADOs", ThisKey="ID", OtherKey="DEPARTAMENTO")]
-		public EntitySet<CHAMADO> CHAMADOs
-		{
-			get
-			{
-				return this._CHAMADOs;
-			}
-			set
-			{
-				this._CHAMADOs.Assign(value);
 			}
 		}
 		
@@ -668,6 +1252,18 @@ namespace PIM.DAL
 			}
 		}
 		
+		private void attach_CHAMADOs(CHAMADO entity)
+		{
+			this.SendPropertyChanging();
+			entity.DEPARTAMENTO1 = this;
+		}
+		
+		private void detach_CHAMADOs(CHAMADO entity)
+		{
+			this.SendPropertyChanging();
+			entity.DEPARTAMENTO1 = null;
+		}
+		
 		private void attach_CLIENTEs(CLIENTE entity)
 		{
 			this.SendPropertyChanging();
@@ -687,18 +1283,6 @@ namespace PIM.DAL
 		}
 		
 		private void detach_FUNCIONARIOs(FUNCIONARIO entity)
-		{
-			this.SendPropertyChanging();
-			entity.DEPARTAMENTO1 = null;
-		}
-		
-		private void attach_CHAMADOs(CHAMADO entity)
-		{
-			this.SendPropertyChanging();
-			entity.DEPARTAMENTO1 = this;
-		}
-		
-		private void detach_CHAMADOs(CHAMADO entity)
 		{
 			this.SendPropertyChanging();
 			entity.DEPARTAMENTO1 = null;
@@ -1043,424 +1627,6 @@ namespace PIM.DAL
 		{
 			this.SendPropertyChanging();
 			entity.GRAU_URGENCIA1 = null;
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.CHAMADO")]
-	public partial class CHAMADO : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _ID;
-		
-		private int _DEPARTAMENTO;
-		
-		private int _GRAU_URGENCIA;
-		
-		private string _ANDAR;
-		
-		private string _TITULO;
-		
-		private string _DESCRICAO;
-		
-		private int _CLIENTE;
-		
-		private System.Nullable<int> _FUNCIONARIO;
-		
-		private System.Nullable<System.DateTime> _CONCLUSAO;
-		
-		private EntityRef<CLIENTE> _CLIENTE1;
-		
-		private EntityRef<DEPARTAMENTO> _DEPARTAMENTO1;
-		
-		private EntityRef<FUNCIONARIO> _FUNCIONARIO1;
-		
-		private EntityRef<GRAU_URGENCIA> _GRAU_URGENCIA1;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnIDChanging(int value);
-    partial void OnIDChanged();
-    partial void OnDEPARTAMENTOChanging(int value);
-    partial void OnDEPARTAMENTOChanged();
-    partial void OnGRAU_URGENCIAChanging(int value);
-    partial void OnGRAU_URGENCIAChanged();
-    partial void OnANDARChanging(string value);
-    partial void OnANDARChanged();
-    partial void OnTITULOChanging(string value);
-    partial void OnTITULOChanged();
-    partial void OnDESCRICAOChanging(string value);
-    partial void OnDESCRICAOChanged();
-    partial void OnCLIENTEChanging(int value);
-    partial void OnCLIENTEChanged();
-    partial void OnFUNCIONARIOChanging(System.Nullable<int> value);
-    partial void OnFUNCIONARIOChanged();
-    partial void OnCONCLUSAOChanging(System.Nullable<System.DateTime> value);
-    partial void OnCONCLUSAOChanged();
-    #endregion
-		
-		public CHAMADO()
-		{
-			this._CLIENTE1 = default(EntityRef<CLIENTE>);
-			this._DEPARTAMENTO1 = default(EntityRef<DEPARTAMENTO>);
-			this._FUNCIONARIO1 = default(EntityRef<FUNCIONARIO>);
-			this._GRAU_URGENCIA1 = default(EntityRef<GRAU_URGENCIA>);
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int ID
-		{
-			get
-			{
-				return this._ID;
-			}
-			set
-			{
-				if ((this._ID != value))
-				{
-					this.OnIDChanging(value);
-					this.SendPropertyChanging();
-					this._ID = value;
-					this.SendPropertyChanged("ID");
-					this.OnIDChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DEPARTAMENTO", DbType="Int NOT NULL")]
-		public int DEPARTAMENTO
-		{
-			get
-			{
-				return this._DEPARTAMENTO;
-			}
-			set
-			{
-				if ((this._DEPARTAMENTO != value))
-				{
-					if (this._DEPARTAMENTO1.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnDEPARTAMENTOChanging(value);
-					this.SendPropertyChanging();
-					this._DEPARTAMENTO = value;
-					this.SendPropertyChanged("DEPARTAMENTO");
-					this.OnDEPARTAMENTOChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_GRAU_URGENCIA", DbType="Int NOT NULL")]
-		public int GRAU_URGENCIA
-		{
-			get
-			{
-				return this._GRAU_URGENCIA;
-			}
-			set
-			{
-				if ((this._GRAU_URGENCIA != value))
-				{
-					if (this._GRAU_URGENCIA1.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnGRAU_URGENCIAChanging(value);
-					this.SendPropertyChanging();
-					this._GRAU_URGENCIA = value;
-					this.SendPropertyChanged("GRAU_URGENCIA");
-					this.OnGRAU_URGENCIAChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ANDAR", DbType="VarChar(10) NOT NULL", CanBeNull=false)]
-		public string ANDAR
-		{
-			get
-			{
-				return this._ANDAR;
-			}
-			set
-			{
-				if ((this._ANDAR != value))
-				{
-					this.OnANDARChanging(value);
-					this.SendPropertyChanging();
-					this._ANDAR = value;
-					this.SendPropertyChanged("ANDAR");
-					this.OnANDARChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TITULO", DbType="VarChar(100) NOT NULL", CanBeNull=false)]
-		public string TITULO
-		{
-			get
-			{
-				return this._TITULO;
-			}
-			set
-			{
-				if ((this._TITULO != value))
-				{
-					this.OnTITULOChanging(value);
-					this.SendPropertyChanging();
-					this._TITULO = value;
-					this.SendPropertyChanged("TITULO");
-					this.OnTITULOChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DESCRICAO", DbType="VarChar(500) NOT NULL", CanBeNull=false)]
-		public string DESCRICAO
-		{
-			get
-			{
-				return this._DESCRICAO;
-			}
-			set
-			{
-				if ((this._DESCRICAO != value))
-				{
-					this.OnDESCRICAOChanging(value);
-					this.SendPropertyChanging();
-					this._DESCRICAO = value;
-					this.SendPropertyChanged("DESCRICAO");
-					this.OnDESCRICAOChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CLIENTE", DbType="Int NOT NULL")]
-		public int CLIENTE
-		{
-			get
-			{
-				return this._CLIENTE;
-			}
-			set
-			{
-				if ((this._CLIENTE != value))
-				{
-					if (this._CLIENTE1.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnCLIENTEChanging(value);
-					this.SendPropertyChanging();
-					this._CLIENTE = value;
-					this.SendPropertyChanged("CLIENTE");
-					this.OnCLIENTEChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FUNCIONARIO", DbType="Int")]
-		public System.Nullable<int> FUNCIONARIO
-		{
-			get
-			{
-				return this._FUNCIONARIO;
-			}
-			set
-			{
-				if ((this._FUNCIONARIO != value))
-				{
-					if (this._FUNCIONARIO1.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnFUNCIONARIOChanging(value);
-					this.SendPropertyChanging();
-					this._FUNCIONARIO = value;
-					this.SendPropertyChanged("FUNCIONARIO");
-					this.OnFUNCIONARIOChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CONCLUSAO", DbType="DateTime")]
-		public System.Nullable<System.DateTime> CONCLUSAO
-		{
-			get
-			{
-				return this._CONCLUSAO;
-			}
-			set
-			{
-				if ((this._CONCLUSAO != value))
-				{
-					this.OnCONCLUSAOChanging(value);
-					this.SendPropertyChanging();
-					this._CONCLUSAO = value;
-					this.SendPropertyChanged("CONCLUSAO");
-					this.OnCONCLUSAOChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="CLIENTE_CHAMADO", Storage="_CLIENTE1", ThisKey="CLIENTE", OtherKey="ID", IsForeignKey=true)]
-		public CLIENTE CLIENTE1
-		{
-			get
-			{
-				return this._CLIENTE1.Entity;
-			}
-			set
-			{
-				CLIENTE previousValue = this._CLIENTE1.Entity;
-				if (((previousValue != value) 
-							|| (this._CLIENTE1.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._CLIENTE1.Entity = null;
-						previousValue.CHAMADOs.Remove(this);
-					}
-					this._CLIENTE1.Entity = value;
-					if ((value != null))
-					{
-						value.CHAMADOs.Add(this);
-						this._CLIENTE = value.ID;
-					}
-					else
-					{
-						this._CLIENTE = default(int);
-					}
-					this.SendPropertyChanged("CLIENTE1");
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="DEPARTAMENTO_CHAMADO", Storage="_DEPARTAMENTO1", ThisKey="DEPARTAMENTO", OtherKey="ID", IsForeignKey=true)]
-		public DEPARTAMENTO DEPARTAMENTO1
-		{
-			get
-			{
-				return this._DEPARTAMENTO1.Entity;
-			}
-			set
-			{
-				DEPARTAMENTO previousValue = this._DEPARTAMENTO1.Entity;
-				if (((previousValue != value) 
-							|| (this._DEPARTAMENTO1.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._DEPARTAMENTO1.Entity = null;
-						previousValue.CHAMADOs.Remove(this);
-					}
-					this._DEPARTAMENTO1.Entity = value;
-					if ((value != null))
-					{
-						value.CHAMADOs.Add(this);
-						this._DEPARTAMENTO = value.ID;
-					}
-					else
-					{
-						this._DEPARTAMENTO = default(int);
-					}
-					this.SendPropertyChanged("DEPARTAMENTO1");
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="FUNCIONARIO_CHAMADO", Storage="_FUNCIONARIO1", ThisKey="FUNCIONARIO", OtherKey="ID", IsForeignKey=true)]
-		public FUNCIONARIO FUNCIONARIO1
-		{
-			get
-			{
-				return this._FUNCIONARIO1.Entity;
-			}
-			set
-			{
-				FUNCIONARIO previousValue = this._FUNCIONARIO1.Entity;
-				if (((previousValue != value) 
-							|| (this._FUNCIONARIO1.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._FUNCIONARIO1.Entity = null;
-						previousValue.CHAMADOs.Remove(this);
-					}
-					this._FUNCIONARIO1.Entity = value;
-					if ((value != null))
-					{
-						value.CHAMADOs.Add(this);
-						this._FUNCIONARIO = value.ID;
-					}
-					else
-					{
-						this._FUNCIONARIO = default(Nullable<int>);
-					}
-					this.SendPropertyChanged("FUNCIONARIO1");
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="GRAU_URGENCIA_CHAMADO", Storage="_GRAU_URGENCIA1", ThisKey="GRAU_URGENCIA", OtherKey="ID", IsForeignKey=true)]
-		public GRAU_URGENCIA GRAU_URGENCIA1
-		{
-			get
-			{
-				return this._GRAU_URGENCIA1.Entity;
-			}
-			set
-			{
-				GRAU_URGENCIA previousValue = this._GRAU_URGENCIA1.Entity;
-				if (((previousValue != value) 
-							|| (this._GRAU_URGENCIA1.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._GRAU_URGENCIA1.Entity = null;
-						previousValue.CHAMADOs.Remove(this);
-					}
-					this._GRAU_URGENCIA1.Entity = value;
-					if ((value != null))
-					{
-						value.CHAMADOs.Add(this);
-						this._GRAU_URGENCIA = value.ID;
-					}
-					else
-					{
-						this._GRAU_URGENCIA = default(int);
-					}
-					this.SendPropertyChanged("GRAU_URGENCIA1");
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
 		}
 	}
 }
