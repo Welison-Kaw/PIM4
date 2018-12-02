@@ -29,6 +29,9 @@ namespace PIM.Models.Objects
         [Display(Name = "Técnico")]
         public int FuncionarioID { get; set; }
 
+        [Display(Name = "Atribuição")]
+        public int AtribuicaoID { get; set; }
+
         [Display(Name = "Conclusão")]
         public DateTime? Conclusao { get; set; }
 
@@ -38,6 +41,8 @@ namespace PIM.Models.Objects
         public virtual GrauUrgencia GrauUrgencia { get; set; }
 
         public virtual Cliente Cliente { get; set; }
+
+        public virtual Atribuicao Atribuicao { get; set; }
 
         [Display(Name = "Funcionário")]
         public virtual Funcionario Funcionario { get; set; }

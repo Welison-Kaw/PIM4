@@ -266,10 +266,12 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\AtribuicaoController.cs" />
     <Compile Include="Controllers\ChamadoController.cs" />
     <Compile Include="Controllers\DepartamentoController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\Repository\IAtribuicaoRepositorio.cs" />
     <Compile Include="Controllers\Repository\IChamadoRepositorio.cs" />
     <Compile Include="Controllers\Repository\IDepartamentoRepositorio.cs" />
     <Compile Include="Controllers\Repository\ISetorRepositorio.cs" />
@@ -283,6 +285,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\Objects\Atribuicao.cs" />
     <Compile Include="Models\Objects\Chamado.cs" />
     <Compile Include="Models\Objects\Cliente.cs" />
     <Compile Include="Models\Objects\Departamento.cs" />
@@ -290,6 +293,7 @@
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Objects\Funcionario.cs" />
     <Compile Include="Models\Objects\GrauUrgencia.cs" />
+    <Compile Include="Models\Repository\AtribuicaoRepositorio.cs" />
     <Compile Include="Models\Repository\ChamadoRepositorio.cs" />
     <Compile Include="Models\Repository\DepartamentoRepositorio.cs" />
     <Compile Include="Models\Repository\SetorRepositorio.cs" />
@@ -374,6 +378,11 @@
     <Content Include="Views\Chamado\Index.cshtml" />
     <Content Include="Views\Chamado\Delete.cshtml" />
     <Content Include="Views\Chamado\Edit.cshtml" />
+    <Content Include="Views\Atribuicao\Index.cshtml" />
+    <Content Include="Views\Atribuicao\Details.cshtml" />
+    <Content Include="Views\Atribuicao\Create.cshtml" />
+    <Content Include="Views\Atribuicao\Edit.cshtml" />
+    <Content Include="Views\Atribuicao\Delete.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

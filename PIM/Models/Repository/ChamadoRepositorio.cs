@@ -26,6 +26,7 @@ namespace PIM.Models.Repository
                            join c in dal_DataContext.GRAU_URGENCIAs on a.GRAU_URGENCIA equals c.ID
                            join d in dal_DataContext.CLIENTEs on a.CLIENTE equals d.ID
                            join e in dal_DataContext.FUNCIONARIOs on a.FUNCIONARIO equals e.ID
+                           join f in dal_DataContext.ATRIBUICAOs on a.ATRIBUICAO equals f.ID
                            select new
                            {
                                ID = a.ID,
@@ -40,7 +41,9 @@ namespace PIM.Models.Repository
                                CLIENTEID = d.ID,
                                CLIENTENOME = d.NOME,
                                FUNCIONARIOID = e.ID,
-                               FUNCIONARIONOME = e.NOME
+                               FUNCIONARIONOME = e.NOME,
+                               ATRIBUICAOID = f.ID,
+                               ATRIBUICAONOME = f.NOME
                            };
 
             try
@@ -58,7 +61,8 @@ namespace PIM.Models.Repository
                         Departamento = new Departamento() { id = chamadoDados.DEPARTAMENTOID, Nome = chamadoDados.DEPARTAMENTONOME },
                         GrauUrgencia = new GrauUrgencia() { id = chamadoDados.GRAUURGENCIAID, Nome = chamadoDados.GRAUURGENCIANOME },
                         Cliente = new Cliente() { id = chamadoDados.CLIENTEID, Nome = chamadoDados.CLIENTENOME},
-                        Funcionario = new Funcionario() { id = chamadoDados.FUNCIONARIOID, Nome = chamadoDados.FUNCIONARIONOME}
+                        Funcionario = new Funcionario() { id = chamadoDados.FUNCIONARIOID, Nome = chamadoDados.FUNCIONARIONOME},
+                        Atribuicao = new Atribuicao() { id = chamadoDados.ATRIBUICAOID, Nome = chamadoDados.FUNCIONARIONOME}
                     });
                 }
                 return chamadoLista;
@@ -76,6 +80,7 @@ namespace PIM.Models.Repository
                            join c in dal_DataContext.GRAU_URGENCIAs on a.GRAU_URGENCIA equals c.ID
                            join d in dal_DataContext.CLIENTEs on a.CLIENTE equals d.ID
                            join e in dal_DataContext.FUNCIONARIOs on a.FUNCIONARIO equals e.ID
+                           join f in dal_DataContext.ATRIBUICAOs on a.ATRIBUICAO equals f.ID
                         where a.ID == chamadoID
                            select new
                            {
@@ -91,7 +96,9 @@ namespace PIM.Models.Repository
                                CLIENTEID = d.ID,
                                CLIENTENOME = d.NOME,
                                FUNCIONARIOID = e.ID,
-                               FUNCIONARIONOME = e.NOME
+                               FUNCIONARIONOME = e.NOME,
+                               ATRIBUICAOID = f.ID,
+                               ATRIBUICAONOME = f.NOME
                            };
 
             try
@@ -106,7 +113,8 @@ namespace PIM.Models.Repository
                     Departamento = new Departamento() { id = chamadoDados.DEPARTAMENTOID, Nome = chamadoDados.DEPARTAMENTONOME },
                     GrauUrgencia = new GrauUrgencia() { id = chamadoDados.GRAUURGENCIAID, Nome = chamadoDados.GRAUURGENCIANOME },
                     Cliente = new Cliente() { id = chamadoDados.CLIENTEID, Nome = chamadoDados.CLIENTENOME },
-                    Funcionario = new Funcionario() { id = chamadoDados.FUNCIONARIOID, Nome = chamadoDados.FUNCIONARIONOME }
+                    Funcionario = new Funcionario() { id = chamadoDados.FUNCIONARIOID, Nome = chamadoDados.FUNCIONARIONOME },
+                    Atribuicao = new Atribuicao() { id = chamadoDados.ATRIBUICAOID, Nome = chamadoDados.ATRIBUICAONOME }
                 };
                 return model;
             }
@@ -147,6 +155,7 @@ namespace PIM.Models.Repository
                 chamadoDados.GRAU_URGENCIA = _chamado.GrauUrgenciaID;
                 chamadoDados.CLIENTE = _chamado.ClienteID;
                 chamadoDados.FUNCIONARIO = _chamado.FuncionarioID;
+                chamadoDados.ATRIBUICAO = _chamado.AtribuicaoID;
 
                 dal_DataContext.SubmitChanges();
             }

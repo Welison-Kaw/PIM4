@@ -41,5 +41,7 @@ namespace PIM.Models
         public System.Data.Entity.DbSet<PIM.Models.Objects.Funcionario> Funcionarios { get; set; }
 
         public System.Data.Entity.DbSet<PIM.Models.Objects.GrauUrgencia> GrauUrgencias { get; set; }
+
+        public System.Data.Entity.DbSet<PIM.Models.Objects.Atribuicao> Atribuicaos { get; set; }
     }
 }
