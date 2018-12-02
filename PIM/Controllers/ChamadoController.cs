@@ -48,16 +48,22 @@ namespace PIM.Controllers
             List<SelectListItem> clienteItems = new List<SelectListItem>();
             List<SelectListItem> funcionarioItems = new List<SelectListItem>();
 
-            grauItems.Add(new SelectListItem { Text = "Muito Baixo", Value = "1", Selected = (1 == model.GrauUrgencia.id) ? true : false });
+            /*grauItems.Add(new SelectListItem { Text = "Muito Baixo", Value = "1", Selected = (1 == model.GrauUrgencia.id) ? true : false });
             grauItems.Add(new SelectListItem { Text = "Baixo", Value = "2", Selected = (2 == model.GrauUrgencia.id) ? true : false });
             grauItems.Add(new SelectListItem { Text = "Médio", Value = "3", Selected = (3 == model.GrauUrgencia.id) ? true : false });
             grauItems.Add(new SelectListItem { Text = "Alto", Value = "4", Selected = (4 == model.GrauUrgencia.id) ? true : false });
-            grauItems.Add(new SelectListItem { Text = "Muito Alto", Value = "5", Selected = (5 == model.GrauUrgencia.id) ? true : false });
+            grauItems.Add(new SelectListItem { Text = "Muito Alto", Value = "5", Selected = (5 == model.GrauUrgencia.id) ? true : false });*/
+
+            IGrauUrgenciaRepositorio _grauRepo = new GrauUrgenciaRepositorio();
+            foreach(var GP in _grauRepo.GetGrauUrgencia())
+            {
+                grauItems.Add(new SelectListItem { Text = GP.Nome, Value = GP.id.ToString(), Selected = (GP.id == model.GrauUrgencia.id) ? true : false }); 
+            }
 
             IDepartamentoRepositorio _depRepo = new DepartamentoRepositorio();
-            foreach (var DP in _depRepo.GetDepartamento())
+            foreach (var DR in _depRepo.GetDepartamento())
             {
-                departamentoItems.Add(new SelectListItem { Text = DP.Nome, Value = DP.id.ToString(), Selected = (DP.id == model.Departamento.id) ? true : false });
+                departamentoItems.Add(new SelectListItem { Text = DR.Nome, Value = DR.id.ToString(), Selected = (DR.id == model.Departamento.id) ? true : false });
             }
 
             clienteItems.Add(new SelectListItem { Text = "Bruno", Value = "1", Selected = (1 == model.Cliente.id) ? true : false });
