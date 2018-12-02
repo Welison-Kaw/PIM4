@@ -58,6 +58,12 @@ namespace PIM.Models.Repository
                         Descricao = chamadoDados.DESCRICAO,
                         Conclusao = chamadoDados.CONCLUSAO,
 
+                        DepartamentoID = chamadoDados.DEPARTAMENTOID,
+                        GrauUrgenciaID = chamadoDados.GRAUURGENCIAID,
+                        ClienteID = chamadoDados.GRAUURGENCIAID,
+                        FuncionarioID = chamadoDados.FUNCIONARIOID,
+                        AtribuicaoID = chamadoDados.ATRIBUICAOID,
+
                         Departamento = new Departamento() { id = chamadoDados.DEPARTAMENTOID, Nome = chamadoDados.DEPARTAMENTONOME },
                         GrauUrgencia = new GrauUrgencia() { id = chamadoDados.GRAUURGENCIAID, Nome = chamadoDados.GRAUURGENCIANOME },
                         Cliente = new Cliente() { id = chamadoDados.CLIENTEID, Nome = chamadoDados.CLIENTENOME},

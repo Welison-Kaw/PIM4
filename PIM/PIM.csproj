@@ -273,6 +273,7 @@
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\Repository\IAtribuicaoRepositorio.cs" />
     <Compile Include="Controllers\Repository\IChamadoRepositorio.cs" />
+    <Compile Include="Controllers\Repository\IClienteRepositorio.cs" />
     <Compile Include="Controllers\Repository\IDepartamentoRepositorio.cs" />
     <Compile Include="Controllers\Repository\IGrauUrgenciaRepositorio.cs" />
     <Compile Include="Controllers\Repository\ISetorRepositorio.cs" />
@@ -297,6 +298,7 @@
     <Compile Include="Models\Objects\GrauUrgencia.cs" />
     <Compile Include="Models\Repository\AtribuicaoRepositorio.cs" />
     <Compile Include="Models\Repository\ChamadoRepositorio.cs" />
+    <Compile Include="Models\Repository\ClienteRepositorio.cs" />
     <Compile Include="Models\Repository\DepartamentoRepositorio.cs" />
     <Compile Include="Models\Repository\GrauUrgenciaRepositorio.cs" />
     <Compile Include="Models\Repository\SetorRepositorio.cs" />
