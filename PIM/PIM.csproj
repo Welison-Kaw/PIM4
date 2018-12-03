@@ -386,7 +386,6 @@
     <Content Include="Views\Departamento\Edit.cshtml" />
     <Content Include="Views\Chamado\Index.cshtml" />
     <Content Include="Views\Chamado\Delete.cshtml" />
-    <Content Include="Views\Chamado\Edit.cshtml" />
     <Content Include="Views\Atribuicao\Index.cshtml" />
     <Content Include="Views\Atribuicao\Details.cshtml" />
     <Content Include="Views\Atribuicao\Create.cshtml" />
@@ -407,6 +406,8 @@
     <Content Include="Views\Funcionario\Create.cshtml" />
     <Content Include="Views\Funcionario\Edit.cshtml" />
     <Content Include="Views\Funcionario\Delete.cshtml" />
+    <Content Include="Views\Chamado\Edit.cshtml" />
+    <Content Include="Views\Chamado\Details.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

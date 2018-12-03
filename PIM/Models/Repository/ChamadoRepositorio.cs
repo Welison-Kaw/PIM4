@@ -17,16 +17,18 @@ namespace PIM.Models.Repository
             dal_DataContext = new DALDataContext();
         }
 
-        public IEnumerable<Chamado> GetChamado()
+        public IEnumerable<Chamado> GetChamado(int ID = 0)
         {
             IList<Chamado> chamadoLista = new List<Chamado>();
 
             var consulta = from a in dal_DataContext.CHAMADOs
-                           join b in dal_DataContext.DEPARTAMENTOs on a.DEPARTAMENTO equals b.ID
-                           join c in dal_DataContext.GRAU_URGENCIAs on a.GRAU_URGENCIA equals c.ID
-                           join d in dal_DataContext.CLIENTEs on a.CLIENTE equals d.ID
-                           join e in dal_DataContext.FUNCIONARIOs on a.FUNCIONARIO equals e.ID
-                           join f in dal_DataContext.ATRIBUICAOs on a.ATRIBUICAO equals f.ID
+                               join b in dal_DataContext.DEPARTAMENTOs on a.DEPARTAMENTO equals b.ID
+                               join c in dal_DataContext.GRAU_URGENCIAs on a.GRAU_URGENCIA equals c.ID
+                               join d in dal_DataContext.CLIENTEs on a.CLIENTE equals d.ID
+                               join e in dal_DataContext.FUNCIONARIOs on a.FUNCIONARIO equals e.ID
+                               join f in dal_DataContext.ATRIBUICAOs on a.ATRIBUICAO equals f.ID
+                           where a.ID == ID
+                                || ID == 0
                            select new
                            {
                                ID = a.ID,
@@ -68,7 +70,7 @@ namespace PIM.Models.Repository
                         GrauUrgencia = new GrauUrgencia() { id = chamadoDados.GRAUURGENCIAID, Nome = chamadoDados.GRAUURGENCIANOME },
                         Cliente = new Cliente() { id = chamadoDados.CLIENTEID, Nome = chamadoDados.CLIENTENOME},
                         Funcionario = new Funcionario() { id = chamadoDados.FUNCIONARIOID, Nome = chamadoDados.FUNCIONARIONOME},
-                        Atribuicao = new Atribuicao() { id = chamadoDados.ATRIBUICAOID, Nome = chamadoDados.FUNCIONARIONOME}
+                        Atribuicao = new Atribuicao() { id = chamadoDados.ATRIBUICAOID, Nome = chamadoDados.ATRIBUICAONOME}
                     });
                 }
                 return chamadoLista;
@@ -79,7 +81,7 @@ namespace PIM.Models.Repository
             }
         }
 
-        public Chamado GetChamadoPorID(int chamadoID)
+        /*public Chamado GetChamadoPorID(int chamadoID)
         {
             var query = from a in dal_DataContext.CHAMADOs
                            join b in dal_DataContext.DEPARTAMENTOs on a.DEPARTAMENTO equals b.ID
@@ -134,7 +136,7 @@ namespace PIM.Models.Repository
             {
                 throw ex;
             }
-        }
+        }*/
 
         public void InserirChamado(Chamado _chamado)
         {

@@ -24,6 +24,9 @@
             @Html.DisplayNameFor(model => model.Funcionario)
         </th>
         <th>
+            @Html.DisplayNameFor(model => model.Atribuicao)
+        </th>
+        <th>
             @Html.DisplayNameFor(model => model.Conclusao)
         </th>
         <th></th>
@@ -48,6 +51,9 @@
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Funcionario.Nome)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Atribuicao.Nome)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Conclusao)
