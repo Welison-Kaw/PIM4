@@ -36,6 +36,70 @@ namespace PIM.Controllers
             return View(model);
         }
 
+        public ActionResult Create()
+        {
+            List<SelectListItem> grauItems = new List<SelectListItem>();
+            List<SelectListItem> departamentoItems = new List<SelectListItem>();
+            List<SelectListItem> clienteItems = new List<SelectListItem>();
+            List<SelectListItem> funcionarioItems = new List<SelectListItem>();
+            List<SelectListItem> atribuicaoItems = new List<SelectListItem>();
+
+            IGrauUrgenciaRepositorio _grauRepo = new GrauUrgenciaRepositorio();
+            foreach (var GP in _grauRepo.GetGrauUrgencia())
+            {
+                grauItems.Add(new SelectListItem { Text = GP.Nome, Value = GP.id.ToString() });
+            }
+
+            IDepartamentoRepositorio _depRepo = new DepartamentoRepositorio();
+            foreach (var DR in _depRepo.GetDepartamento())
+            {
+                departamentoItems.Add(new SelectListItem { Text = DR.Nome, Value = DR.id.ToString() });
+            }
+
+            IClienteRepositorio _clienteRepo = new ClienteRepositorio();
+            foreach (var CR in _clienteRepo.GetCliente())
+            {
+                clienteItems.Add(new SelectListItem { Text = CR.Nome, Value = CR.id.ToString() });
+            }
+
+            IFuncionarioRepositorio _funcRepo = new FuncionarioRepositorio();
+            foreach (var FR in _funcRepo.GetFuncionario())
+            {
+                funcionarioItems.Add(new SelectListItem { Text = FR.Nome, Value = FR.id.ToString() });
+            }
+
+            IAtribuicaoRepositorio _atribRepo = new AtribuicaoRepositorio();
+            foreach (var AR in _atribRepo.GetAtribuicao())
+            {
+                atribuicaoItems.Add(new SelectListItem { Text = AR.Nome, Value = AR.id.ToString() });
+            }
+
+            ViewBag.GrauUrgenciaID = grauItems;
+            ViewBag.DepartamentoID = departamentoItems;
+            ViewBag.ClienteID = clienteItems;
+            ViewBag.FuncionarioID = funcionarioItems;
+            ViewBag.AtribuicaoID = atribuicaoItems;
+
+            return View(new Chamado());
+        }
+        [HttpPost]
+        public ActionResult Create(Chamado chamado)
+        {
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    _repositorio.InserirChamado(chamado);
+                    return RedirectToAction("Index");
+                }
+            }
+            catch (DataException)
+            {
+                ModelState.AddModelError("", "Problemas ao salvar os dados...");
+            }
+            return View(chamado);
+        }
+
         public ActionResult Edit(int id)
         {
             //Chamado model = _repositorio.GetChamadoPorID(id);

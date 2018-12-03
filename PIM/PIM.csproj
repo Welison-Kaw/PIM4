@@ -408,6 +408,7 @@
     <Content Include="Views\Funcionario\Delete.cshtml" />
     <Content Include="Views\Chamado\Edit.cshtml" />
     <Content Include="Views\Chamado\Details.cshtml" />
+    <Content Include="Views\Chamado\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

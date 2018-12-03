@@ -140,7 +140,26 @@ namespace PIM.Models.Repository
 
         public void InserirChamado(Chamado _chamado)
         {
-            //
+            try
+            {
+                var chamadoDados = new CHAMADO()
+                {
+                    TITULO = _chamado.Titulo,
+                    DESCRICAO = _chamado.Descricao,
+
+                    DEPARTAMENTO = _chamado.DepartamentoID,
+                    GRAU_URGENCIA = _chamado.GrauUrgenciaID,
+                    CLIENTE = _chamado.ClienteID,
+                    FUNCIONARIO = _chamado.FuncionarioID,
+                    ATRIBUICAO = _chamado.AtribuicaoID
+                };
+                dal_DataContext.CHAMADOs.InsertOnSubmit(chamadoDados);
+                dal_DataContext.SubmitChanges();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
 
         public void DeletarChamado(int chamadoID)

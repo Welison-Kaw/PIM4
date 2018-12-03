@@ -73,7 +73,6 @@ namespace PIM.Models.Repository
             {
                 var departamentoDados = new DEPARTAMENTO()
                 {
-                    //ID = setor.id,
                     NOME = _departamento.Nome,
                     SETOR = _departamento.SetorID
                 };
