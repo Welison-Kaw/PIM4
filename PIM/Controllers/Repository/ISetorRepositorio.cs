@@ -9,8 +9,8 @@ namespace PIM.Controllers.Repository
 {
     public interface ISetorRepositorio
     {
-        IEnumerable<Setor> GetSetor();
-        Setor GetSetorPorID(int setorID);
+        IEnumerable<Setor> GetSetor(int ID = 0);
+        //Setor GetSetorPorID(int setorID);
         void InserirSetor(Setor _setor);
         void DeletarSetor(int setorID);
         void AtualizarSetor(Setor _setor);

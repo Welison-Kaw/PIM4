@@ -16,10 +16,12 @@ namespace PIM.Models.Repository
             dal_DataContext = new DALDataContext();
         }
 
-        public IEnumerable<Setor> GetSetor()
+        public IEnumerable<Setor> GetSetor(int ID = 0)
         {
             IList<Setor> setorLista = new List<Setor>();
             var consulta = from q in dal_DataContext.SETORs
+                           where q.ID == ID 
+                                || ID == 0
                            select q;
 
             try
@@ -41,7 +43,7 @@ namespace PIM.Models.Repository
             }
         }
 
-        public Setor GetSetorPorID(int setorID)
+        /*public Setor GetSetorPorID(int setorID)
         {
             var query = from s in dal_DataContext.SETORs
                         where s.ID == setorID
@@ -61,7 +63,7 @@ namespace PIM.Models.Repository
             {
                 throw ex;
             }
-        }
+        }*/
 
         public void InserirSetor(Setor setor)
         {

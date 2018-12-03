@@ -8,7 +8,7 @@ using PIM.Models.Objects;
 
 namespace PIM.Models.Repository
 {
-    public class ClienteRepositorio: IClienteRepositorio
+    public class ClienteRepositorio : IClienteRepositorio
     {
         private DALDataContext dal_DataContext;
 
@@ -17,12 +17,14 @@ namespace PIM.Models.Repository
             dal_DataContext = new DALDataContext();
         }
 
-        public IEnumerable<Cliente> GetCliente()
+        public IEnumerable<Cliente> GetCliente(int ID = 0)
         {
             IList<Cliente> clienteLista = new List<Cliente>();
 
             var consulta = from a in dal_DataContext.CLIENTEs
                            join b in dal_DataContext.DEPARTAMENTOs on a.DEPARTAMENTO equals b.ID
+                           where a.ID == ID 
+                                || ID == 0
                            select new
                            {
                                ID = a.ID,
@@ -37,7 +39,7 @@ namespace PIM.Models.Repository
             try
             {
                 var cliente = consulta.ToList();
-                foreach(var clienteDados in cliente)
+                foreach (var clienteDados in cliente)
                 {
                     clienteLista.Add(new Cliente()
                     {
@@ -57,24 +59,57 @@ namespace PIM.Models.Repository
             }
         }
 
-        public Cliente GetClientePorID(int clienteID)
-        {
-            return null;
-        }
-
         public void InserirCliente(Cliente _cliente)
         {
-            //
+            try
+            {
+                var clienteDados = new CLIENTE()
+                {
+                    NOME = _cliente.Nome,
+                    EMAIL = _cliente.Email,
+                    SENHA = _cliente.Senha,
+                    DEPARTAMENTO = _cliente.DepartamentoID
+                };
+                dal_DataContext.CLIENTEs.InsertOnSubmit(clienteDados);
+                dal_DataContext.SubmitChanges();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
         }
 
         public void DeletarCliente(int clienteID)
         {
-            //
+            try
+            {
+                CLIENTE cliente = dal_DataContext.CLIENTEs.Where(c => c.ID == clienteID).SingleOrDefault();
+                dal_DataContext.CLIENTEs.DeleteOnSubmit(cliente);
+                dal_DataContext.SubmitChanges();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
 
         public void AtualizarCliente(Cliente _cliente)
         {
-            //
-        }
+            try
+            {
+                CLIENTE cliente = dal_DataContext.CLIENTEs.Where(c => c.ID == _cliente.id).SingleOrDefault();
+                cliente.NOME = _cliente.Nome;
+                cliente.EMAIL = _cliente.Email;
+                //cliente.SENHA = _cliente.Senha;
+                cliente.DEPARTAMENTO = _cliente.DepartamentoID;
 
+                dal_DataContext.SubmitChanges();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
     }
+}

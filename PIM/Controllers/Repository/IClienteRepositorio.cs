@@ -9,8 +9,7 @@ namespace PIM.Controllers.Repository
 {
     public interface IClienteRepositorio
     {
-        IEnumerable<Cliente> GetCliente();
-        Cliente GetClientePorID(int clienteID);
+        IEnumerable<Cliente> GetCliente(int ID = 0);
         void InserirCliente(Cliente _cliente);
         void DeletarCliente(int clienteID);
         void AtualizarCliente(Cliente _cliente);

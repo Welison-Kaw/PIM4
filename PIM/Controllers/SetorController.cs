@@ -32,7 +32,8 @@ namespace PIM.Controllers
 
         public ActionResult Details(int id)
         {
-            Setor model = _repositorio.GetSetorPorID(id);
+            //Setor model = _repositorio.GetSetorPorID(id);
+            Setor model = _repositorio.GetSetor(ID: id).First();
             return View(model);
         }
 
@@ -60,7 +61,7 @@ namespace PIM.Controllers
 
         public ActionResult Edit(int id)
         {
-            Setor model = _repositorio.GetSetorPorID(id);
+            Setor model = _repositorio.GetSetor(ID: id).First();
             return View(model);
         }
         [HttpPost]
@@ -87,7 +88,8 @@ namespace PIM.Controllers
             {
                 ViewBag.ErrorMessage = "Problema ao deletar dados";
             }
-            Setor setor = _repositorio.GetSetorPorID(id);
+            //Setor setor = _repositorio.GetSetorPorID(id);
+            Setor setor = _repositorio.GetSetor(ID: id).First();
             return View(setor);
         }
         [HttpPost, ActionName("Delete")]
