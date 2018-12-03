@@ -1070,8 +1070,6 @@ namespace PIM.DAL
 		
 		private EntitySet<CLIENTE> _CLIENTEs;
 		
-		private EntitySet<FUNCIONARIO> _FUNCIONARIOs;
-		
 		private EntityRef<SETOR> _SETOR1;
 		
     #region Extensibility Method Definitions
@@ -1090,7 +1088,6 @@ namespace PIM.DAL
 		{
 			this._CHAMADOs = new EntitySet<CHAMADO>(new Action<CHAMADO>(this.attach_CHAMADOs), new Action<CHAMADO>(this.detach_CHAMADOs));
 			this._CLIENTEs = new EntitySet<CLIENTE>(new Action<CLIENTE>(this.attach_CLIENTEs), new Action<CLIENTE>(this.detach_CLIENTEs));
-			this._FUNCIONARIOs = new EntitySet<FUNCIONARIO>(new Action<FUNCIONARIO>(this.attach_FUNCIONARIOs), new Action<FUNCIONARIO>(this.detach_FUNCIONARIOs));
 			this._SETOR1 = default(EntityRef<SETOR>);
 			OnCreated();
 		}
@@ -1185,19 +1182,6 @@ namespace PIM.DAL
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="DEPARTAMENTO_FUNCIONARIO", Storage="_FUNCIONARIOs", ThisKey="ID", OtherKey="DEPARTAMENTO")]
-		public EntitySet<FUNCIONARIO> FUNCIONARIOs
-		{
-			get
-			{
-				return this._FUNCIONARIOs;
-			}
-			set
-			{
-				this._FUNCIONARIOs.Assign(value);
-			}
-		}
-		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="SETOR_DEPARTAMENTO", Storage="_SETOR1", ThisKey="SETOR", OtherKey="ID", IsForeignKey=true)]
 		public SETOR SETOR1
 		{
@@ -1275,18 +1259,6 @@ namespace PIM.DAL
 			this.SendPropertyChanging();
 			entity.DEPARTAMENTO1 = null;
 		}
-		
-		private void attach_FUNCIONARIOs(FUNCIONARIO entity)
-		{
-			this.SendPropertyChanging();
-			entity.DEPARTAMENTO1 = this;
-		}
-		
-		private void detach_FUNCIONARIOs(FUNCIONARIO entity)
-		{
-			this.SendPropertyChanging();
-			entity.DEPARTAMENTO1 = null;
-		}
 	}
 	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.FUNCIONARIO")]
@@ -1303,11 +1275,7 @@ namespace PIM.DAL
 		
 		private string _SENHA;
 		
-		private int _DEPARTAMENTO;
-		
 		private EntitySet<CHAMADO> _CHAMADOs;
-		
-		private EntityRef<DEPARTAMENTO> _DEPARTAMENTO1;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -1321,14 +1289,11 @@ namespace PIM.DAL
     partial void OnEMAILChanged();
     partial void OnSENHAChanging(string value);
     partial void OnSENHAChanged();
-    partial void OnDEPARTAMENTOChanging(int value);
-    partial void OnDEPARTAMENTOChanged();
     #endregion
 		
 		public FUNCIONARIO()
 		{
 			this._CHAMADOs = new EntitySet<CHAMADO>(new Action<CHAMADO>(this.attach_CHAMADOs), new Action<CHAMADO>(this.detach_CHAMADOs));
-			this._DEPARTAMENTO1 = default(EntityRef<DEPARTAMENTO>);
 			OnCreated();
 		}
 		
@@ -1412,30 +1377,6 @@ namespace PIM.DAL
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DEPARTAMENTO", DbType="Int NOT NULL")]
-		public int DEPARTAMENTO
-		{
-			get
-			{
-				return this._DEPARTAMENTO;
-			}
-			set
-			{
-				if ((this._DEPARTAMENTO != value))
-				{
-					if (this._DEPARTAMENTO1.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnDEPARTAMENTOChanging(value);
-					this.SendPropertyChanging();
-					this._DEPARTAMENTO = value;
-					this.SendPropertyChanged("DEPARTAMENTO");
-					this.OnDEPARTAMENTOChanged();
-				}
-			}
-		}
-		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="FUNCIONARIO_CHAMADO", Storage="_CHAMADOs", ThisKey="ID", OtherKey="FUNCIONARIO")]
 		public EntitySet<CHAMADO> CHAMADOs
 		{
@@ -1446,40 +1387,6 @@ namespace PIM.DAL
 			set
 			{
 				this._CHAMADOs.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="DEPARTAMENTO_FUNCIONARIO", Storage="_DEPARTAMENTO1", ThisKey="DEPARTAMENTO", OtherKey="ID", IsForeignKey=true)]
-		public DEPARTAMENTO DEPARTAMENTO1
-		{
-			get
-			{
-				return this._DEPARTAMENTO1.Entity;
-			}
-			set
-			{
-				DEPARTAMENTO previousValue = this._DEPARTAMENTO1.Entity;
-				if (((previousValue != value) 
-							|| (this._DEPARTAMENTO1.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._DEPARTAMENTO1.Entity = null;
-						previousValue.FUNCIONARIOs.Remove(this);
-					}
-					this._DEPARTAMENTO1.Entity = value;
-					if ((value != null))
-					{
-						value.FUNCIONARIOs.Add(this);
-						this._DEPARTAMENTO = value.ID;
-					}
-					else
-					{
-						this._DEPARTAMENTO = default(int);
-					}
-					this.SendPropertyChanged("DEPARTAMENTO1");
-				}
 			}
 		}
 		

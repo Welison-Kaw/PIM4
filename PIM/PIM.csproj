@@ -268,12 +268,14 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AtribuicaoController.cs" />
     <Compile Include="Controllers\ChamadoController.cs" />
+    <Compile Include="Controllers\FuncionarioController.cs" />
     <Compile Include="Controllers\ClienteController.cs" />
     <Compile Include="Controllers\DepartamentoController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\Repository\IAtribuicaoRepositorio.cs" />
     <Compile Include="Controllers\Repository\IChamadoRepositorio.cs" />
+    <Compile Include="Controllers\Repository\IFuncionarioRepositorio.cs" />
     <Compile Include="Controllers\Repository\IClienteRepositorio.cs" />
     <Compile Include="Controllers\Repository\IDepartamentoRepositorio.cs" />
     <Compile Include="Controllers\Repository\IGrauUrgenciaRepositorio.cs" />
@@ -299,6 +301,7 @@
     <Compile Include="Models\Objects\GrauUrgencia.cs" />
     <Compile Include="Models\Repository\AtribuicaoRepositorio.cs" />
     <Compile Include="Models\Repository\ChamadoRepositorio.cs" />
+    <Compile Include="Models\Repository\FuncionarioRepositorio.cs" />
     <Compile Include="Models\Repository\ClienteRepositorio.cs" />
     <Compile Include="Models\Repository\DepartamentoRepositorio.cs" />
     <Compile Include="Models\Repository\GrauUrgenciaRepositorio.cs" />
@@ -399,6 +402,11 @@
     <Content Include="Views\Cliente\Create.cshtml" />
     <Content Include="Views\Cliente\Edit.cshtml" />
     <Content Include="Views\Cliente\Delete.cshtml" />
+    <Content Include="Views\Funcionario\Index.cshtml" />
+    <Content Include="Views\Funcionario\Details.cshtml" />
+    <Content Include="Views\Funcionario\Create.cshtml" />
+    <Content Include="Views\Funcionario\Edit.cshtml" />
+    <Content Include="Views\Funcionario\Delete.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
