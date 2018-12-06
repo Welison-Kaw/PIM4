@@ -10,7 +10,7 @@ using System.Data;
 
 namespace PIM.Controllers
 {
-    public class FuncionarioController : Controller
+    public class FuncionarioController : BaseController
     {
         private IFuncionarioRepositorio _repositorio;
 

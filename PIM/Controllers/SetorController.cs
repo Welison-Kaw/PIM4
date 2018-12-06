@@ -10,7 +10,7 @@ using System.Data;
 
 namespace PIM.Controllers
 {
-    public class SetorController : Controller
+    public class SetorController : BaseController
     {
         private ISetorRepositorio _repositorio;
 

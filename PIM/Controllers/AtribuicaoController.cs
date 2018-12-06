@@ -10,7 +10,7 @@ using System.Data;
 
 namespace PIM.Controllers
 {
-    public class AtribuicaoController : Controller
+    public class AtribuicaoController : BaseController
     {
         private IAtribuicaoRepositorio _repositorio;
 

@@ -10,7 +10,7 @@ using System.Data;
 
 namespace PIM.Controllers
 {
-    public class GrauUrgenciaController : Controller
+    public class GrauUrgenciaController : BaseController
     {
         private IGrauUrgenciaRepositorio _repositorio;
 
