@@ -1,8 +1,8 @@
 ﻿@model PIM.Models.Objects.Atribuicao
 
-<h3>Are you sure you want to delete this?</h3>
+<h2>Exclusão de Atribuição</h2>
+<h3>Deseja realmente deletar este item?</h3>
 <div>
-    <h4>Atribuicao</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
@@ -24,9 +24,11 @@
     @using (Html.BeginForm()) {
         @Html.AntiForgeryToken()
 
-        <div class="form-actions no-color">
-            <input type="submit" value="Delete" class="btn btn-default" /> |
-            @Html.ActionLink("Back to List", "Index")
+        <div class="form-group">
+            <div class="col-md-offset-1 col-md-10">
+                <input type="submit" value="Excluir" class="btn btn-danger" />
+                <a href="/Atribuicao" class="btn btn-primary">Voltar</a>
+            </div>
         </div>
     }
 </div>
