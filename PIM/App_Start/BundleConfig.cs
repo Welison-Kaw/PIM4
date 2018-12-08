@@ -28,6 +28,7 @@ namespace PIM
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
                       "~/Content/navbar.css",
+                      "~/Content/login.css",
                       "~/Content/site.css"));
         }
     }

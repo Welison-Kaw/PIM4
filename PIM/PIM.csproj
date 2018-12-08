@@ -266,6 +266,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\AcessoController.cs" />
     <Compile Include="Controllers\AtribuicaoController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\ChamadoController.cs" />
@@ -300,6 +301,7 @@
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Objects\Funcionario.cs" />
     <Compile Include="Models\Objects\GrauUrgencia.cs" />
+    <Compile Include="Models\Objects\Login.cs" />
     <Compile Include="Models\Repository\AtribuicaoRepositorio.cs" />
     <Compile Include="Models\Repository\ChamadoRepositorio.cs" />
     <Compile Include="Models\Repository\FuncionarioRepositorio.cs" />
@@ -314,7 +316,9 @@
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\login.css" />
     <Content Include="Content\navbar.css" />
+    <Content Include="Content\RedefinirSenha.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -415,6 +419,7 @@
     <Content Include="Views\Chamado\Details.cshtml" />
     <Content Include="Views\Chamado\Create.cshtml" />
     <Content Include="Views\Shared\_LayoutBACKUP.cshtml" />
+    <Content Include="Views\Acesso\Login.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
