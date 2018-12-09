@@ -33,6 +33,12 @@
                 </div>*@
             </div>
             <button class="btn btn-primary btn-block btn-lg btn-signin" type="submit">ENTRAR</button>
+            @if (@Session["ErroLogin"] != null)
+            {
+                <div class="alert alert-danger" role="alert">
+                    @Session["ErroLogin"]
+                </div>
+            }
         </form>
         @*<a href="redefinirSenha.html" class="forgot-password">Esqueceu a senha?</a>*@
     </div>

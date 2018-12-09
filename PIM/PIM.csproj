@@ -420,6 +420,7 @@
     <Content Include="Views\Chamado\Create.cshtml" />
     <Content Include="Views\Shared\_LayoutBACKUP.cshtml" />
     <Content Include="Views\Acesso\Login.cshtml" />
+    <Content Include="Views\Acesso\Erro404.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

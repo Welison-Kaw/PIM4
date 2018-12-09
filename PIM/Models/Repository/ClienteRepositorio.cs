@@ -17,6 +17,11 @@ namespace PIM.Models.Repository
             dal_DataContext = new DALDataContext();
         }
 
+        public ClienteRepositorio(DALDataContext d)
+        {
+            dal_DataContext = d;
+        }
+
         public IEnumerable<Cliente> GetCliente(int ID = 0)
         {
             IList<Cliente> clienteLista = new List<Cliente>();
@@ -56,6 +61,35 @@ namespace PIM.Models.Repository
             catch (Exception ex)
             {
                 throw ex;
+            }
+        }
+
+        public Cliente GetClienteLogin(Login login)
+        {
+            var consulta = from a in dal_DataContext.CLIENTEs
+                           where a.EMAIL == login.Email && a.SENHA == login.Senha
+                           select new
+                           {
+                               ID = a.ID,
+                               NOME = a.NOME,
+                               EMAIL = a.EMAIL
+                           };
+
+            try
+            {
+                var cliente = consulta.FirstOrDefault();
+                Cliente c = new Cliente()
+                {
+                    id = cliente.ID,
+                    Nome = cliente.NOME,
+                    Email = cliente.EMAIL
+                };
+
+                return c;
+            }
+            catch
+            {
+                return null;
             }
         }
 

@@ -16,7 +16,48 @@ namespace PIM.Controllers
         [HttpPost]
         public ActionResult Login(Login login)
         {
-            return RedirectToAction("Index", "Setor");
+            Repository.IFuncionarioRepositorio _rf;
+            Repository.IClienteRepositorio _rc;
+
+            _rf = new Models.Repository.FuncionarioRepositorio(new DAL.DALDataContext());
+            _rc = new Models.Repository.ClienteRepositorio(new DAL.DALDataContext());
+
+            Funcionario f = _rf.GetFuncionarioLogin(login);
+            if (f != null)
+            {
+                Session["usuarioLogadoID"] = f.id;
+                Session["usuarioLogadoNome"] = f.Nome;
+                Session["usuarioLogadoTipo"] = "f";
+                Session["ErroLogin"] = null;
+            }
+            else
+            {
+                Cliente c = _rc.GetClienteLogin(login);
+                if (c != null)
+                {
+                    Session["usuarioLogadoID"] = c.id;
+                    Session["usuarioLogadoNome"] = c.Nome;
+                    Session["usuarioLogadoTipo"] = "c";
+                    Session["ErroLogin"] = null;
+                }
+                else
+                {
+                    Session["ErroLogin"] = "E-mail e Senha não encontrados!";
+                    return RedirectToAction("Login", "Acesso");
+                }
+            }
+            return RedirectToAction("Index", "Chamado");
+        }
+
+        public ActionResult Erro404()
+        {
+            return View();
+        }
+
+        public ActionResult Logoff()
+        {
+            Session["usuarioLogadoID"] = null;
+            return RedirectToAction("Login", "Acesso");
         }
 
         // GET: Acesso

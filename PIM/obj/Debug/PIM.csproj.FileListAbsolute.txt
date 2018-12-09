@@ -109,4 +109,3 @@ C:\Users\Welison\documents\visual studio 2015\Projects\PIM.Web\PIM\bin\Remotion.
 C:\Users\Welison\documents\visual studio 2015\Projects\PIM.Web\PIM\bin\System.Diagnostics.DiagnosticSource.xml
 C:\Users\Welison\documents\visual studio 2015\Projects\PIM.Web\PIM\bin\System.Interactive.Async.xml
 C:\Users\Welison\documents\visual studio 2015\Projects\PIM.Web\PIM\bin\System.Runtime.CompilerServices.Unsafe.xml
-C:\Users\Welison\documents\visual studio 2015\Projects\PIM.Web\PIM\obj\Debug\PIM.csprojResolveAssemblyReference.cache

@@ -17,6 +17,11 @@ namespace PIM.Models.Repository
             dal_DataContext = new DALDataContext();
         }
 
+        public FuncionarioRepositorio(DALDataContext d)
+        {
+            dal_DataContext = d;
+        }
+
         public IEnumerable<Funcionario> GetFuncionario(int ID = 0)
         {
             IList<Funcionario> funcionarioLista = new List<Funcionario>();
@@ -56,6 +61,35 @@ namespace PIM.Models.Repository
             catch (Exception ex)
             {
                 throw ex;
+            }
+        }
+
+        public Funcionario GetFuncionarioLogin(Login login)
+        {
+            var consulta = from a in dal_DataContext.FUNCIONARIOs
+                           where a.EMAIL == login.Email && a.SENHA == login.Senha
+                           select new
+                           {
+                               ID = a.ID,
+                               NOME = a.NOME,
+                               EMAIL = a.EMAIL
+                           };
+
+            try
+            {
+                var funcionario = consulta.FirstOrDefault();
+                Funcionario f = new Funcionario()
+                {
+                    id = funcionario.ID,
+                    Nome = funcionario.NOME,
+                    Email = funcionario.EMAIL
+                };
+
+                return f;
+            }
+            catch
+            {
+                return null;
             }
         }
 

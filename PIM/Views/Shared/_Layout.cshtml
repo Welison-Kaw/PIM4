@@ -62,11 +62,12 @@
         <nav id="sidebar">
             <div class="sidebar-header">
                 <img src="/img/logo.png" class="profile-img-card">
-                <p class="profile-name-card">User</p>
+                <p class="profile-name-card">@Session["usuarioLogadoNome"]</p>
                 <p id="link">
-                    <a id="linkMinhaConta" class="link" href="editarPerfil.html">Minha Conta</a>
+                    <!--<a id="linkMinhaConta" class="link" href="editarPerfil.html">Minha Conta</a>-->
                     <!--<span>&#124;</span>-->
-                    <a id="linhaFecharSessao" class="link" href="#">Fechar Sessão</a>
+                    @Html.ActionLink("Fechar Sessão", "Logoff", "Acesso")
+                    <!--<a id="linhaFecharSessao" class="link" href="#">Fechar Sessão</a>-->
                 </p>
             </div>
 
@@ -84,30 +85,33 @@
                     </a>
                     <ul class="collapse list-unstyled" id="chamadoSubmenu">
                         <li>
-                            <a href="chamados/AbrirChamado.html">Abrir Chamados</a>
-                            <a href="chamados/ChamadosAbertos.html">Chamados Abertos</a>
+                            @Html.ActionLink("Listar Chamados", "Index", "Chamado")
+                            <!--<a href="chamados/ChamadosAbertos.html">Chamados Abertos</a>
                             <a href="chamados/ChamadosAtendimento.html">Chamados Em Atendimento</a>
                             <a href="chamados/ChamadosAtribuidos.html">Chamados Atribuidos</a>
                             <a href="chamados/ChamadosFechados.html">Chamados Fechados</a>
-                            <a href="chamados/MeusChamados.html">Meus Chamados</a>
+                            <a href="chamados/MeusChamados.html">Meus Chamados</a>-->
                         </li>
                     </ul>
                 </li>
-                <li>
-                    <a href="#cadastrosSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
-                        <i class="fas fa-wrench"></i>
-                        Cadastros
-                    </a>
-                    <ul class="collapse list-unstyled" id="cadastrosSubmenu">
-                        <li>@Html.ActionLink("Setores", "Index", "Setor")</li>
-                        <li>@Html.ActionLink("Departamentos", "Index", "Departamento")</li>
-                        <li>@Html.ActionLink("Graus de Urgência", "Index", "GrauUrgencia")</li>
-                        <li>@Html.ActionLink("Atribuições", "Index", "Atribuicao")</li>
-                        <li>@Html.ActionLink("Clientes", "Index", "Cliente")</li>
-                        <li>@Html.ActionLink("Funcionarios", "Index", "Funcionario")</li>
-                    </ul>   
-                </li>
-                <li>
+                @if (Session["usuarioLogadoTipo"] == "f")
+                {
+                    <li>
+                        <a href="#cadastrosSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+                            <i class="fas fa-wrench"></i>
+                            Cadastros
+                        </a>
+                        <ul class="collapse list-unstyled" id="cadastrosSubmenu">
+                            <li>@Html.ActionLink("Setores", "Index", "Setor")</li>
+                            <li>@Html.ActionLink("Departamentos", "Index", "Departamento")</li>
+                            <li>@Html.ActionLink("Graus de Urgência", "Index", "GrauUrgencia")</li>
+                            <li>@Html.ActionLink("Atribuições", "Index", "Atribuicao")</li>
+                            <li>@Html.ActionLink("Clientes", "Index", "Cliente")</li>
+                            <li>@Html.ActionLink("Funcionarios", "Index", "Funcionario")</li>
+                        </ul>
+                    </li>
+                }
+                <!--<li>
                     <a href="#userSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
                         <i class="fas fa-user"></i>
                         Usuários
@@ -128,7 +132,7 @@
                             <a href="Funcionarios.html">Listar Funcionários</a>
                         </li>
                     </ul>
-                </li>
+                </li>-->
             </ul>
         </nav>
 

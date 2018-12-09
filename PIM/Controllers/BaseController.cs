@@ -17,9 +17,9 @@ namespace PIM.Controllers
         // Redirect to login page if user's session is not valid.
         public void InitAppController(ActionExecutingContext filterContext)
         {
-            if (1==2)
+            if (Session["usuarioLogadoID"] == null)
             {
-                filterContext.Result = RedirectToAction("Index", "Home");
+                filterContext.Result = RedirectToAction("Login", "Acesso");
             }
         }
     }
